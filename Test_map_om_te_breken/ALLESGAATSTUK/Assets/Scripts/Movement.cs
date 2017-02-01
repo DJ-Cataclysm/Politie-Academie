@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     void Update() {
         //Debug.Log(Time.deltaTime);
         float temp = 0;
+        int banaan = 12;
+        //inclusief wilde comment
 
         // Moving
         if (Input.GetKey(KeyCode.A)) {
