@@ -1,4 +1,4 @@
-﻿llusing UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour 
@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     void Update() {
         //Debug.Log(Time.deltaTime);
         float temp = 0;
-
+        float haha = 256;
         // Moving
         if (Input.GetKey(KeyCode.A)) {
             this.snappy -= 0.1f;
