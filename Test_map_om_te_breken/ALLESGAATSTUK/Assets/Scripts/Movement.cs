@@ -18,10 +18,10 @@ public class Movement : MonoBehaviour
 
         // Moving
         if (Input.GetKey(KeyCode.A)) {
-            this.snappy -= 0.1f;
+            this.snappy -= 0.15f;
             if (this.snappy < 0) this.snappy = 0;
             if (currentSpeed > 0) {
-                currentSpeed *= 0.9f;
+                currentSpeed *= 0.95f;
             }
             if (GetComponent<Rigidbody>().velocity.x <= -1) {
                 temp -= snappy;
