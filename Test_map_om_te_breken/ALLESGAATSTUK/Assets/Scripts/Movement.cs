@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿llusing UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour 
@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
 
         // Moving
         if (Input.GetKey(KeyCode.A)) {
-            this.snappy -= 0.15f;
+            this.snappy -= 0.1f;
             if (this.snappy < 0) this.snappy = 0;
             if (currentSpeed > 0) {
                 currentSpeed *= 0.95f;
