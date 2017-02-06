@@ -16,6 +16,7 @@ public class WandControllerRight : MonoBehaviour {
     public bool triggerButtonUp = false;
     public bool triggerButtonPressed = false;
 
+    public Controller3D controller3D;
 
     public GameObject raycastObject;
     RaycastHit objectHit;
@@ -56,7 +57,11 @@ public class WandControllerRight : MonoBehaviour {
 
         if (triggerButtonDown) {
             Debug.Log("triggerButton was just pressed");
-            CheckForHit();
+            if (controller3D != null)
+            {
+                controller3D.CheckForHit();
+            }
+            //CheckForHit();
         }
         if (triggerButtonUp) {
             Debug.Log("triggerbutton was just released");
@@ -65,24 +70,21 @@ public class WandControllerRight : MonoBehaviour {
             controllerPosition = Vector3.zero;
         }
         if (triggerButtonPressed) {
-            if (objectToMove != null) {
-                Vector3 movement = trackedObject.transform.position - controllerPosition;
-                objectToMove.transform.position = objectToMovePosition + movement;
-            }
+            
         }
     }
 
-    void CheckForHit() {
-        Vector3 fwd = raycastObject.transform.InverseTransformDirection(Vector3.forward);
-        Debug.DrawRay(raycastObject.transform.position, fwd * 50, Color.green);
-        if(Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 50)) {
-            print("Gotten something");
-            GameObject target = objectHit.collider.gameObject;
-            if (target.tag == "Block") {
-                objectToMove = target;
-                objectToMovePosition = target.transform.position;
-                controllerPosition = trackedObject.transform.position;
-            }
-        }
-    }
+    //void CheckForHit() {
+    //    Vector3 fwd = raycastObject.transform.InverseTransformDirection(Vector3.forward);
+    //    Debug.DrawRay(raycastObject.transform.position, fwd * 50, Color.green);
+    //    if(Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 50)) {
+    //        print("Gotten something");
+    //        GameObject target = objectHit.collider.gameObject;
+    //        if (target.tag == "Block") {
+    //            objectToMove = target;
+    //            objectToMovePosition = target.transform.position;
+    //            controllerPosition = trackedObject.transform.position;
+    //        }
+    //    }
+    //}
 }
