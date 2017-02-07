@@ -42,7 +42,7 @@ public class TargetReloader : MonoBehaviour {
         }
     }
 
-    public void activateTargets(Transform targetToExclude) {
+    public void ActivateTargets(Transform targetToExclude) {
         //print("Activating 1 target");
 
         int index = Random.Range(0, targets.Count);
