@@ -18,13 +18,6 @@ public class WandControllerRight : MonoBehaviour {
 
     public Controller3D controller3D;
 
-    public GameObject raycastObject;
-    RaycastHit objectHit;
-
-    private GameObject objectToMove;
-    private Vector3 objectToMovePosition;
-    private Vector3 controllerPosition;
-
     private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input((int)trackedObject.index); } }
     private SteamVR_TrackedObject trackedObject;
 
@@ -50,41 +43,27 @@ public class WandControllerRight : MonoBehaviour {
 
         if (gripButtonDown) {
             Debug.Log("GripButton was just pressed");
+            if(controller3D != null) {
+                controller3D.ReloadGun();
+            }
         }
+
         if (gripButtonUp) {
             Debug.Log("Gripbutton was just released");
         }
 
         if (triggerButtonDown) {
             Debug.Log("triggerButton was just pressed");
-            if (controller3D != null)
-            {
-                controller3D.CheckForHit();
+            if (controller3D != null) {
+                controller3D.FireGun();
             }
-            //CheckForHit();
         }
         if (triggerButtonUp) {
             Debug.Log("triggerbutton was just released");
-            objectToMove = null;
-            objectToMovePosition = Vector3.zero;
-            controllerPosition = Vector3.zero;
         }
+
         if (triggerButtonPressed) {
-            
+
         }
     }
-
-    //void CheckForHit() {
-    //    Vector3 fwd = raycastObject.transform.InverseTransformDirection(Vector3.forward);
-    //    Debug.DrawRay(raycastObject.transform.position, fwd * 50, Color.green);
-    //    if(Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 50)) {
-    //        print("Gotten something");
-    //        GameObject target = objectHit.collider.gameObject;
-    //        if (target.tag == "Block") {
-    //            objectToMove = target;
-    //            objectToMovePosition = target.transform.position;
-    //            controllerPosition = trackedObject.transform.position;
-    //        }
-    //    }
-    //}
 }
