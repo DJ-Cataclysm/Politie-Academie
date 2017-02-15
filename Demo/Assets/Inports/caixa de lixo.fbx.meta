@@ -1,0 +1,151 @@
+fileFormatVersion: 2
+guid: 0225923c10492774b98dc76cb9274bf0
+timeCreated: 1486477787
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: caixa_de_lixo
+    100004: Camera
+    100006: Cube
+    100008: Cylinder
+    100010: Cylinder_2
+    100012: Cylinder_3
+    100014: Cylinder_4
+    100016: Light
+    100018: Light_1
+    100020: Light_2
+    100022: Light_3
+    100024: "ma\xE7aneta"
+    100026: "ma\xE7aneta_2"
+    100028: pes
+    100030: pes_1
+    100032: Sky
+    100034: Symmetry
+    100036: Symmetry_1
+    100038: Symmetry_1_2
+    100040: Symmetry_2
+    100042: Symmetry_2_2
+    100044: tampa
+    100046: Torus
+    100048: Torus_2
+    100050: Torus_3
+    100052: Torus_4
+    400000: //RootNode
+    400002: caixa_de_lixo
+    400004: Camera
+    400006: Cube
+    400008: Cylinder
+    400010: Cylinder_2
+    400012: Cylinder_3
+    400014: Cylinder_4
+    400016: Light
+    400018: Light_1
+    400020: Light_2
+    400022: Light_3
+    400024: "ma\xE7aneta"
+    400026: "ma\xE7aneta_2"
+    400028: pes
+    400030: pes_1
+    400032: Sky
+    400034: Symmetry
+    400036: Symmetry_1
+    400038: Symmetry_1_2
+    400040: Symmetry_2
+    400042: Symmetry_2_2
+    400044: tampa
+    400046: Torus
+    400048: Torus_2
+    400050: Torus_3
+    400052: Torus_4
+    2300000: Cube
+    2300002: Cylinder
+    2300004: Cylinder_3
+    2300006: "ma\xE7aneta"
+    2300008: tampa
+    2300010: Torus
+    2300012: Torus_3
+    3300000: Cube
+    3300002: Cylinder
+    3300004: Cylinder_3
+    3300006: "ma\xE7aneta"
+    3300008: tampa
+    3300010: Torus
+    3300012: Torus_3
+    4300000: tampa
+    4300002: Torus
+    4300004: Cylinder
+    4300006: Torus_3
+    4300008: Cylinder_3
+    4300010: "ma\xE7aneta"
+    4300012: Cube
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
