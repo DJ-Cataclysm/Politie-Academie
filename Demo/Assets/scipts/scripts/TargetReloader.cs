@@ -65,7 +65,7 @@ public class TargetReloader : MonoBehaviour {
         } else {
             targets[index].gameObject.SetActive(true);
             // play sound
-            targets[index].GetComponent<AudioSource>().Play();
+            //targets[index].GetComponent<AudioSource>().Play();
         }
 
         activatingTargets = false;
