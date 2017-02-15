@@ -26,13 +26,11 @@ public class WandControllerRight : MonoBehaviour
     void Start()
     {
         trackedObject = GetComponent<SteamVR_TrackedObject>();
-        print("Start reached :>");
     }
 
     // Update is called once per frame
     void Update()
     {
-        print("update weee");
         if (controller == null)
         {
             Debug.Log("Controller not initialized");
@@ -61,6 +59,7 @@ public class WandControllerRight : MonoBehaviour
             print("trigger pressed");
             if (controller3D != null)
             {
+                print("gun should fire");
                 controller3D.FireGun();
                 SteamVR_Controller.Input((int)controller.index).TriggerHapticPulse(500);
             }
