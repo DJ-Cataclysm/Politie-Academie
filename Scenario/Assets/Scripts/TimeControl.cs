@@ -22,9 +22,6 @@ public class TimeControl : MonoBehaviour {
         directionalLight = GetComponent<Transform>(); //gets the transform for the light
 	}
 
-    // Update is called once per frame
-    void Update() { }
-
     public void changeTime(timeList time) {
         if(time == timeList.Day) {
             directionalLight.rotation = Quaternion.AngleAxis(90, new Vector3(90, 0, 0));
