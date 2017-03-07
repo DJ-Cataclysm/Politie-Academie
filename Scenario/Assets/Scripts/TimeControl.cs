@@ -34,4 +34,22 @@ public class TimeControl : MonoBehaviour {
             light.intensity = 0;
         }
     }
-}
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("d"))
+        {
+            directionalLight.rotation = Quaternion.AngleAxis(90, new Vector3(90, 0, 0));
+            light.intensity = 1;
+        }
+        else if (Input.GetKeyDown("s"))
+        {
+            directionalLight.rotation = Quaternion.AngleAxis(22.5f, new Vector3(22.5f, 0, 0));
+            light.intensity = 0.25f;
+        }
+        else if (Input.GetKeyDown("n"))
+        {
+            directionalLight.rotation = Quaternion.AngleAxis(0, new Vector3(0, 0, 0));
+            light.intensity = 0;
+        }
+    }
