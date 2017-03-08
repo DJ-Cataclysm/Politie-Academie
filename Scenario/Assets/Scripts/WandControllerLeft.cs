@@ -8,7 +8,7 @@ public class WandControllerLeft : MonoBehaviour
 {
 
 
-    private EVRButtonId triggerButton = EVRButtonId.k_EButton_SteamVR_Touchpad;
+    private EVRButtonId triggerButton = EVRButtonId.k_EButton_SteamVR_Trigger;
     public bool triggerButtonDown = false;
     public bool triggerButtonUp = false;
     public bool triggerButtonPressed = false;
