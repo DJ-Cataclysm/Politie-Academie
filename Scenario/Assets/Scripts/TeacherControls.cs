@@ -16,11 +16,7 @@ public class TeacherControls : MonoBehaviour {
     public CylinderScript cylinder;
 
     private string target = "cylinder";
-    public Text currentCam;
-
-    private void Start() {
-        currentCam.text = "Current cam: Cylinder";
-    }
+    //public Text currentCam;
 
 	// Update is called once per frame
 	void Update () {
@@ -35,11 +31,11 @@ public class TeacherControls : MonoBehaviour {
         if (target == "cube") {
             cubeCam.gameObject.SetActive(true);
             cylinderCam.gameObject.SetActive(false);
-            currentCam.text = "Current cam: Cube";
+            //currentCam.text = "Current cam: Cube";
         } else if (target == "cylinder") {
             cubeCam.gameObject.SetActive(false);
             cylinderCam.gameObject.SetActive(true);
-            currentCam.text = "Current cam: Cylinder";
+            //currentCam.text = "Current cam: Cylinder";
         }
     }
 
