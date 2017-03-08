@@ -15,7 +15,7 @@ public class TeacherControls : MonoBehaviour {
     public Camera cylinderCam;
     public CylinderScript cylinder;
 
-    private string target;
+    private string target = "cylinder";
     public Text currentCam;
 
     private void Start() {
@@ -24,7 +24,10 @@ public class TeacherControls : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.J)) ActionOne();
+        if (Input.GetKeyDown(KeyCode.J)) TriggerAction(Input.inputString);
+        if (Input.GetKeyDown(KeyCode.K)) TriggerAction(Input.inputString);
+        if (Input.GetKeyDown(KeyCode.L)) TriggerAction(Input.inputString);
+        if (Input.GetKeyDown(KeyCode.I)) TriggerAction(Input.inputString);
 
         if (Input.GetKey(KeyCode.Alpha1)) target = "cube";
         if (Input.GetKey(KeyCode.Alpha2)) target = "cylinder";
@@ -40,15 +43,15 @@ public class TeacherControls : MonoBehaviour {
         }
     }
 
-    public void ActionOne() {
+    public void TriggerAction(string s) {
         switch (target) {
             case "cube":
-            cube.isIdle = true;
-            cube.ActionOne();
+            cube.isMoving = false;
+            cube.FireAction(s);
             break;
             case "cylinder":
-            cylinder.isIdle = true;
-            cylinder.ActionOne();
+            cylinder.isMoving = false;
+            cylinder.FireAction(s);
             break;
         }
     }

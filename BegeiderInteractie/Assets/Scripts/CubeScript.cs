@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour {
 
-    public bool isIdle { get; set; }
+    public bool isMoving = true;
     private int crudetimer = 0;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
+    public ActionOne actionOne;
+    public ActionTwo actionTwo;
+
 	// Update is called once per frame
 	void Update () {
-        if (!isIdle) {
+        if (isMoving) {
             if (crudetimer < 80) {
                 GetComponent<Transform>().transform.position -= transform.right * Time.deltaTime * -5;
             } else if (crudetimer <= 160) {
@@ -26,7 +24,18 @@ public class CubeScript : MonoBehaviour {
         }
     }
 
-    public void ActionOne() {
-        this.transform.GetComponent<Renderer>().material.color = Color.green;
+    public void FireAction(string s) {
+        switch (s) {
+            case "j":
+            actionOne.Action();
+            break;
+            case "k":
+            actionTwo.Action();
+            break;
+            case "l":
+            break;
+            case "i":
+            break;
+        }
     }
 }
