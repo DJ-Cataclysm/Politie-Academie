@@ -10,13 +10,13 @@ public class SampleAgentScript : MonoBehaviour {
 
 	void Start () {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, 4));
+        target = GameObject.Find("Landmark" + Random.Range(1, 5));
     }
 	
 	void Update () {
         agent.SetDestination(target.transform.position);
         if (agent.remainingDistance < 1) {
-            target = GameObject.Find("Landmark" + Random.Range(1, 4));
+            target = GameObject.Find("Landmark" + Random.Range(1, 5));
             agent.SetDestination(target.transform.position);
         }
 	}
