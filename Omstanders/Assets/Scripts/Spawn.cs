@@ -6,17 +6,26 @@ public class Spawn : MonoBehaviour {
 
     public GameObject npc;
 
+    private float a;
+    private float x;
+    private float z;
+
 	void Start () {
-        int amountSpawned = Random.Range(2, 10);
-        print(amountSpawned);
+        //float amountSpawned = Random.Range(2, 10);
+        float amountSpawned = 3;
+        //print(amountSpawned);
+
+        a = (2 / amountSpawned) * 180;
+        //x = 8 * Mathf.Cos(a);
+        //z = 8 * Mathf.Sin(a);
+
+        print(a + " " + x + " " + z);
 
         for (int i = 0; i < amountSpawned; i++) {
-            Instantiate(npc, new Vector3(i * Random.Range(1, 5), 1, i * Random.Range(1, 5)), Quaternion.identity);
+            print(a + " " + x + " " + z);
+            x = ((i+1)*8) * Mathf.Cos(a);
+            z = ((i+1)*8) * Mathf.Sin(a);
+            Instantiate(npc, new Vector3(x, 1, z), Quaternion.identity);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

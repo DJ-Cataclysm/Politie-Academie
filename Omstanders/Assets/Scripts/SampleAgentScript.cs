@@ -15,7 +15,7 @@ public class SampleAgentScript : MonoBehaviour {
 	
 	void Update () {
         agent.SetDestination(target.transform.position);
-        if (agent.remainingDistance < 1) {
+        if (agent.remainingDistance < 2) {
             target = GameObject.Find("Landmark" + Random.Range(1, 5));
             agent.SetDestination(target.transform.position);
         }
