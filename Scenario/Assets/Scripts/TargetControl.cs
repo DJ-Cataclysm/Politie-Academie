@@ -9,6 +9,8 @@ public class TargetControl : MonoBehaviour {
 
     private bool knifeDrawn = false;
 
+    private bool surrendered = false;
+
     public AudioSource walkAudio;  // The walk audio
     public AudioSource knifeAudio;
 
@@ -16,6 +18,7 @@ public class TargetControl : MonoBehaviour {
     public AnimationClip slashanimation;
 
     public KnifeAnimation knifeAnimations;
+    public TargetAnimations targetAnimations;
 
     public List<AudioClip> drawKnifeAudioClips = new List<AudioClip>();
     public List<AudioClip> walkAudioClips = new List<AudioClip>();
@@ -48,22 +51,32 @@ public class TargetControl : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space)) walkToTarget = !walkToTarget; // If you press space, it starts or stops walking to you
         if (Input.GetKeyDown(KeyCode.LeftShift)) runEnabled = !runEnabled; // If you press the left shift, the target will run instead of walk
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            if (!knifeAnimations.AnimationIsPlaying("draw")) {
-                if (!knifeDrawn) {
-                    knifeDrawn = true;
-                    DrawKnife();
-                } else if (knifeDrawn) {
-                    knifeDrawn = false;
-                    SheatheKnife();
+            if (!surrendered) {
+                if (!knifeAnimations.AnimationIsPlaying("draw")) {
+                    if (!knifeDrawn) {
+                        knifeDrawn = true;
+                        DrawKnife();
+                    } else if (knifeDrawn) {
+                        knifeDrawn = false;
+                        SheatheKnife();
+                    }
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+            if (!knifeDrawn) {
+                if (!surrendered) {
+                    surrendered = true;
+                    targetAnimations.surrender();
+                }else {
+                    surrendered = false;
+                    targetAnimations.aggresive();
                 }
             }
         }
 
         if (knifeDrawn) {
             if (knifeAnimations.GetAnimationTime("draw") >= 0.5 && knifeAnimations.GetAnimationTime("draw") <= 0.52) {
-                //GetComponent<AudioSource>().clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
-                //GetComponent<AudioSource>().Play();
-                Debug.Log("Drawing Knife");
                 knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
                 knifeAudio.Play();
             }
