@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawn : MonoBehaviour {
 
     public GameObject npc;
     public float amountSpawned = 40;
+    public float amountIdleSpawned = 1;
 
     void Start () {
         print("Amount spawned is: " + amountSpawned);
@@ -32,6 +34,10 @@ public class Spawn : MonoBehaviour {
             // This 'else' should never be reached
             else
                 print("Oopsie! Mistake!");
+        }
+
+        for (int i=0;i<amountIdleSpawned;i++) {
+            Instantiate(npc, new Vector3(GameObject.Find("IdleSpawnpoint1").transform.position.x, 1, GameObject.Find("IdleSpawnpoint1").transform.position.z), Quaternion.identity);
         }
     }
 }
