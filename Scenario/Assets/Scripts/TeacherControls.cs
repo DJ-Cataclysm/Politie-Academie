@@ -52,3 +52,14 @@ public class TeacherControls : MonoBehaviour {
         }
     }
 }
+
+// Pseudo code for to-do:
+//
+// Ipv een losse public variabele voor elke enemy is er maar één: "Target"
+// Target wordt assigned op runtime: De eerste enemy in de List "npcs"
+// 
+// Vervolgens roep ik ipv de switch TriggerAction rechtstreeks "target.FireAction(Input.inputString)" aan.
+//          (Hiervoor is wel een 'nieuw' script nodig: EnemyScript)
+//
+// Hoeveelheid enemies moet meegegeven worden en bekend zijn, en variabel zijn.
+//
