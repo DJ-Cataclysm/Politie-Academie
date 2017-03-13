@@ -8,17 +8,31 @@ public class SampleAgentScript : MonoBehaviour {
     public GameObject target;
     NavMeshAgent agent;
     public int landmarkAmount;
+    public bool isIdle = false;
 
-	void Start () {
+    public Material mat1;
+    public Material mat2;
+    public Material mat3;
+    public Material mat4;
+    List<Material> mats = new List<Material>();
+
+    void Start () {
+        if (this.gameObject.tag != "Target") {
+            mats.Add(mat1); mats.Add(mat2); mats.Add(mat3); mats.Add(mat4);
+            int randomMat = Random.Range(0, 4);
+            this.gameObject.GetComponent<Renderer>().material = mats[randomMat];
+        }
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Landmark" + Random.Range(1, 5));
     }
 	
 	void Update () {
-        agent.SetDestination(target.transform.position);
-        if (agent.remainingDistance < 2) {
-            target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount+1)));
+        if (!isIdle) {
             agent.SetDestination(target.transform.position);
+            if (agent.remainingDistance < 2) {
+                target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+                agent.SetDestination(target.transform.position);
+            }
         }
 	}
 }
