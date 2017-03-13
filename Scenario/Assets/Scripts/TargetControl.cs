@@ -43,6 +43,7 @@ public class TargetControl : MonoBehaviour {
     public float acceleration;
 
     public float targetAccuracy;
+    public float maxDistanceToCivilian;
 
     public float maxDistance;       // How close the target can get to you before stopping
     public float stabDistance;
@@ -135,8 +136,9 @@ public class TargetControl : MonoBehaviour {
     }
 
     private void ShootCivilian() {
-        if (civilianToShoot == null) {
-            civilianToShoot = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
+        while (civilianToShoot == null) {
+            Transform temp = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
+            if (Vector3.Distance(transform.position, temp.position) < maxDistanceToCivilian && temp.gameObject.activeSelf) civilianToShoot = temp;
         }
 
         if (turnToCivilian) {
@@ -156,7 +158,7 @@ public class TargetControl : MonoBehaviour {
             Inaccuracy(ref gunHole, targetAccuracy);
             Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
             RaycastHit targetHit;
-            Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
+            //Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
             if(Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
                 if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                     targetHit.transform.gameObject.SetActive(false);
