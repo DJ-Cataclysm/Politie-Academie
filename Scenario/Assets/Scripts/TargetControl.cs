@@ -42,7 +42,10 @@ public class TargetControl : MonoBehaviour {
     public float runFactor;
     public float acceleration;
 
+    public float targetAccuracy;
+
     public float maxDistance;       // How close the target can get to you before stopping
+    public float stabDistance;
 
     // Gets the difference between 2 floats
     Func<float, float, float> getDelta = (a, b) => a - b;
@@ -127,7 +130,7 @@ public class TargetControl : MonoBehaviour {
         if (shootCivilian || turnToCivilian) ShootCivilian();
 
         if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
-            if (Vector3.Distance(target.transform.position, transform.position) <= 1.4) Stab();
+            if (Vector3.Distance(target.transform.position, transform.position) <= stabDistance) Stab();
         }
     }
 
@@ -150,7 +153,7 @@ public class TargetControl : MonoBehaviour {
 
         if (!turnToCivilian && shootCivilian) {
             Quaternion gunHoleRotation = gunHole.transform.rotation;
-            Inaccuracy(ref gunHole, 9);
+            Inaccuracy(ref gunHole, targetAccuracy);
             Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
             RaycastHit targetHit;
             Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
@@ -167,7 +170,6 @@ public class TargetControl : MonoBehaviour {
 
     private void Inaccuracy(ref Transform transform, float inaccuration) {
         Vector3 rotation = new Vector3(UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1));
-        Debug.Log(rotation);
         transform.Rotate(rotation);
     }
 
