@@ -21,8 +21,19 @@ public class TargetControl : MonoBehaviour {
 
     private List<Transform> civilianList = new List<Transform>();
 
+    private int activeCivilians {
+        get {
+            int count = 0;
+            foreach (Transform child in civilianList) {
+                if (child.gameObject.activeSelf) count++;
+            }
+            return count;
+        }
+    }
+
     public AudioSource walkAudio;  // The walk audio
     public AudioSource knifeAudio;
+    public AudioSource shootAudio;
 
     public KnifeAnimation knifeAnimations;
     public TargetAnimations targetAnimations;
@@ -30,6 +41,7 @@ public class TargetControl : MonoBehaviour {
 
     public List<AudioClip> drawKnifeAudioClips = new List<AudioClip>();
     public List<AudioClip> walkAudioClips = new List<AudioClip>();
+    public List<AudioClip> shootAudioClips = new List<AudioClip>();
 
     public Transform civilians;
     public Transform gunHole;
@@ -84,13 +96,13 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
-        if(Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
             if (!surrendered && !knifeDrawn) {
                 if (!gunAnimations.animationIsPlaying("draw")) {
                     if (!gunDrawn) {
                         gunDrawn = true;
                         DrawGun();
-                    }else if (gunDrawn) {
+                    } else if (gunDrawn) {
                         gunDrawn = false;
                         SheatheGun();
                     }
@@ -136,9 +148,15 @@ public class TargetControl : MonoBehaviour {
     }
 
     private void ShootCivilian() {
-        while (civilianToShoot == null) {
+        int count = 0;
+
+        while (civilianToShoot == null && activeCivilians > 0) {
             Transform temp = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
             if (Vector3.Distance(transform.position, temp.position) < maxDistanceToCivilian && temp.gameObject.activeSelf) civilianToShoot = temp;
+            count++;
+            if (count >= 5) {
+                break;
+            }
         }
 
         if (turnToCivilian) {
@@ -153,13 +171,15 @@ public class TargetControl : MonoBehaviour {
             }
         }
 
-        if (!turnToCivilian && shootCivilian) {
+        if (!turnToCivilian && shootCivilian && civilianToShoot != null) {
             Quaternion gunHoleRotation = gunHole.transform.rotation;
             Inaccuracy(ref gunHole, targetAccuracy);
             Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
             RaycastHit targetHit;
-            //Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
-            if(Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
+            Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
+            shootAudio.clip = shootAudioClips[UnityEngine.Random.Range(0, shootAudioClips.Count)];
+            shootAudio.Play();
+            if (Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
                 if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                     targetHit.transform.gameObject.SetActive(false);
                 }
@@ -241,10 +261,10 @@ public class TargetControl : MonoBehaviour {
                     currentAcceleration += acceleration;
                     if (currentAcceleration > 1) currentAcceleration = 1;
                 }
-            }else {
-                if(currentAcceleration > 0) {
+            } else {
+                if (currentAcceleration > 0) {
                     currentAcceleration -= acceleration;
-                    if(currentAcceleration < 0) {
+                    if (currentAcceleration < 0) {
                         currentAcceleration = 0;
                     }
                 }
