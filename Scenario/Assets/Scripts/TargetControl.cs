@@ -6,29 +6,41 @@ using System;
 public class TargetControl : MonoBehaviour {
     private bool walkToTarget = false; // Whether or not the target moves towards you
     private bool runEnabled = false;
+    private float currentAcceleration = 0;
 
     private bool knifeDrawn = false;
 
+    private bool gunDrawn = false;
+
     private bool surrendered = false;
+
+    private bool shootCivilian = false;
+
+    private bool turnToCivilian = false;
+    private Transform civilianToShoot;
+
+    private List<Transform> civilianList = new List<Transform>();
 
     public AudioSource walkAudio;  // The walk audio
     public AudioSource knifeAudio;
 
-    public AnimationClip stabAnimation;
-    public AnimationClip slashanimation;
-
     public KnifeAnimation knifeAnimations;
     public TargetAnimations targetAnimations;
+    public GunAnimations gunAnimations;
 
     public List<AudioClip> drawKnifeAudioClips = new List<AudioClip>();
     public List<AudioClip> walkAudioClips = new List<AudioClip>();
 
+    public Transform civilians;
+    public Transform gunHole;
+
     public Transform knife;
 
     public Transform target;    // The object the target walks towards
-    public float rotationSlerp;     // How fast the target rotates
+    //public float rotationSlerp;     // How fast the target rotates
     public float maxMovementSpeed;  // How fast the target walks in seconds
     public float runFactor;
+    public float acceleration;
 
     public float maxDistance;       // How close the target can get to you before stopping
 
@@ -44,14 +56,19 @@ public class TargetControl : MonoBehaviour {
         if (maxMovementSpeed <= 0) {
             maxMovementSpeed = 1.5f;
         }
+
+        foreach (Transform child in civilians.transform) {
+            civilianList.Add(child);
+        }
     }
 
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) walkToTarget = !walkToTarget; // If you press space, it starts or stops walking to you
         if (Input.GetKeyDown(KeyCode.LeftShift)) runEnabled = !runEnabled; // If you press the left shift, the target will run instead of walk
-        if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            if (!surrendered) {
+        if (Input.GetKeyDown(KeyCode.RightControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+            //Debug.Log("Drawing/Sheating knife");
+            if (!surrendered && !gunDrawn) {
                 if (!knifeAnimations.AnimationIsPlaying("draw")) {
                     if (!knifeDrawn) {
                         knifeDrawn = true;
@@ -63,15 +80,34 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
+        if(Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+            if (!surrendered && !knifeDrawn) {
+                if (!gunAnimations.animationIsPlaying("draw")) {
+                    if (!gunDrawn) {
+                        gunDrawn = true;
+                        DrawGun();
+                    }else if (gunDrawn) {
+                        gunDrawn = false;
+                        SheatheGun();
+                    }
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.LeftAlt)) {
             if (!knifeDrawn) {
                 if (!surrendered) {
                     surrendered = true;
                     targetAnimations.surrender();
-                }else {
+                } else {
                     surrendered = false;
                     targetAnimations.aggresive();
                 }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightAlt)) {
+            if (gunDrawn) {
+                turnToCivilian = true;
+                shootCivilian = true;
             }
         }
 
@@ -85,10 +121,43 @@ public class TargetControl : MonoBehaviour {
 
     void FixedUpdate() {
         // If space has been pressed, walk and rotate
-        if (walkToTarget) WalkToTarget();
+        //Debug.Log(walkToTarget.ToString() + " - " + currentAcceleration);
+        if (walkToTarget || currentAcceleration > 0) WalkToTarget();
+
+        if (shootCivilian || turnToCivilian) ShootCivilian();
 
         if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
             if (Vector3.Distance(target.transform.position, transform.position) <= 1) Stab();
+        }
+    }
+
+    private void ShootCivilian() {
+        if (civilianToShoot == null) {
+            civilianToShoot = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
+        }
+
+        if (turnToCivilian) {
+            Quaternion temp = transform.rotation;
+            rotateToTarget(civilianToShoot.transform, transform.position, ref temp, 5f);
+            transform.rotation = temp;
+
+            Vector3 targetToCivilian = (civilianToShoot.transform.position - transform.position).normalized;
+            float dot = Vector3.Dot(targetToCivilian, transform.forward);
+            if (dot < 0.001 && dot > -0.001) {
+                turnToCivilian = false;
+            }
+        }
+
+        if (!turnToCivilian && shootCivilian) {
+            Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
+            RaycastHit targetHit;
+            if(Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
+                if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
+                    targetHit.transform.gameObject.SetActive(false);
+                }
+            }
+            shootCivilian = false;
+            civilianToShoot = null;
         }
     }
 
@@ -102,6 +171,14 @@ public class TargetControl : MonoBehaviour {
         knifeAnimations.drawKnife();
     }
 
+    private void SheatheGun() {
+        gunAnimations.sheathGun();
+    }
+
+    private void DrawGun() {
+        gunAnimations.drawGun();
+    }
+
     private void Stab() {
         knifeAnimations.Stab();
     }
@@ -113,7 +190,7 @@ public class TargetControl : MonoBehaviour {
     private void WalkToTarget() {
         // Rotates the target
         Quaternion temp = transform.rotation;
-        rotateToTarget(target, transform.position, ref temp);
+        rotateToTarget(target, transform.position, ref temp, 5f);
         transform.rotation = temp;
 
         // Gets the distance between you and the target
@@ -145,19 +222,33 @@ public class TargetControl : MonoBehaviour {
             float distanceThisSecondZ = deltaZ / factor;
             float distanceThisFrameZ = distanceThisSecondZ * Time.deltaTime;
 
+            if (walkToTarget) {
+                if (currentAcceleration < 1) {
+                    currentAcceleration += acceleration;
+                    if (currentAcceleration > 1) currentAcceleration = 1;
+                }
+            }else {
+                if(currentAcceleration > 0) {
+                    currentAcceleration -= acceleration;
+                    if(currentAcceleration < 0) {
+                        currentAcceleration = 0;
+                    }
+                }
+            }
+
             // moves the target
-            transform.position += new Vector3(distanceThisFrameX, 0, distanceThisFrameZ);
+            transform.position += (new Vector3(distanceThisFrameX, 0, distanceThisFrameZ)) * currentAcceleration;
         }
     }
 
     // This function rotates the target towards a specific point.
-    private void rotateToTarget(Transform target, Vector3 selfPosition, ref Quaternion selfRotation) {
+    private void rotateToTarget(Transform target, Vector3 selfPosition, ref Quaternion selfRotation, float slerp) {
         if (target != null) {
             Vector3 lookPosition = target.position - selfPosition;
             lookPosition.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPosition);
             rotation *= Quaternion.Euler(0, 90, 0);
-            selfRotation = Quaternion.Slerp(selfRotation, rotation, Time.deltaTime * rotationSlerp);
+            selfRotation = Quaternion.Slerp(selfRotation, rotation, Time.deltaTime * slerp);
         }
     }
 }
