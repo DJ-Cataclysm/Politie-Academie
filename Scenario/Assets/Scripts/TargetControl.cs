@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 public class TargetControl : MonoBehaviour {
-    private bool walkToTarget = false; // Whether or not the target moves towards you
+    private bool walkToTarget = false;
     private bool runEnabled = false;
     private float currentAcceleration = 0;
 
@@ -31,7 +31,7 @@ public class TargetControl : MonoBehaviour {
         }
     }
 
-    public AudioSource walkAudio;  // The walk audio
+    public AudioSource walkAudio;
     public AudioSource knifeAudio;
     public AudioSource shootAudio;
 
@@ -48,16 +48,15 @@ public class TargetControl : MonoBehaviour {
 
     public Transform knife;
 
-    public Transform target;    // The object the target walks towards
-    //public float rotationSlerp;     // How fast the target rotates
-    public float maxMovementSpeed;  // How fast the target walks in seconds
+    public Transform target;
+    public float maxMovementSpeed;
     public float runFactor;
     public float acceleration;
 
     public float targetAccuracy;
     public float maxDistanceToCivilian;
 
-    public float maxDistance;       // How close the target can get to you before stopping
+    public float maxDistance;
     public float stabDistance;
 
     // Gets the difference between 2 floats
@@ -65,14 +64,14 @@ public class TargetControl : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        // Gets the audio source component
         walkAudio = GetComponent<AudioSource>();
 
-        // If the movementspeed of the target is equal or less than zero, set it to 1.5
+        // This makes sure that the target always has a max movement speed incase the user sets it to low
         if (maxMovementSpeed <= 0) {
             maxMovementSpeed = 1.5f;
         }
 
+        // Gets all the civilians and puts them in a list that's easier to handle
         foreach (Transform child in civilians.transform) {
             civilianList.Add(child);
         }
@@ -82,10 +81,10 @@ public class TargetControl : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) walkToTarget = !walkToTarget; // If you press space, it starts or stops walking to you
         if (Input.GetKeyDown(KeyCode.LeftShift)) runEnabled = !runEnabled; // If you press the left shift, the target will run instead of walk
-        if (Input.GetKeyDown(KeyCode.RightControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) { // If you press the left control, he draws the knife
             //Debug.Log("Drawing/Sheating knife");
-            if (!surrendered && !gunDrawn) {
-                if (!knifeAnimations.AnimationIsPlaying("draw")) {
+            if (!surrendered && !gunDrawn) {    // Make sure he hasn't drawn his gun or has surrenderd
+                if (!knifeAnimations.AnimationIsPlaying("draw")) { // The target cannot be already drawing his knife
                     if (!knifeDrawn) {
                         knifeDrawn = true;
                         DrawKnife();
@@ -96,7 +95,7 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+        if (Input.GetKeyDown(KeyCode.RightControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
             if (!surrendered && !knifeDrawn) {
                 if (!gunAnimations.animationIsPlaying("draw")) {
                     if (!gunDrawn) {
@@ -136,8 +135,6 @@ public class TargetControl : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        // If space has been pressed, walk and rotate
-        //Debug.Log(walkToTarget.ToString() + " - " + currentAcceleration);
         if (walkToTarget || currentAcceleration > 0) WalkToTarget();
 
         if (shootCivilian || turnToCivilian) ShootCivilian();
@@ -147,9 +144,11 @@ public class TargetControl : MonoBehaviour {
         }
     }
 
+    // This function makes the target shoot at the civilian
     private void ShootCivilian() {
         int count = 0;
 
+        // This while-loop gets a random civilian, but it makes sure that the civilian is in range and active. Also, after 5 tries, it stops
         while (civilianToShoot == null && activeCivilians > 0) {
             Transform temp = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
             if (Vector3.Distance(transform.position, temp.position) < maxDistanceToCivilian && temp.gameObject.activeSelf) civilianToShoot = temp;
@@ -159,6 +158,7 @@ public class TargetControl : MonoBehaviour {
             }
         }
 
+        // This turns the target to the civilian.
         if (turnToCivilian) {
             Quaternion temp = transform.rotation;
             rotateToTarget(civilianToShoot.transform, transform.position, ref temp, 5f);
@@ -171,56 +171,72 @@ public class TargetControl : MonoBehaviour {
             }
         }
 
+        // If the target is done rotating, is still ordered to shoot the civilian and there is a civilian to shoot, shoot
         if (!turnToCivilian && shootCivilian && civilianToShoot != null) {
+            // Rotate the barrel slightly for inaccuracy
             Quaternion gunHoleRotation = gunHole.transform.rotation;
             Inaccuracy(ref gunHole, targetAccuracy);
+            
             Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
             RaycastHit targetHit;
-            Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
+            //Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
+
             shootAudio.clip = shootAudioClips[UnityEngine.Random.Range(0, shootAudioClips.Count)];
             shootAudio.Play();
+
+            // Shoot the bullet, and if it hits, check if it is a civilian
             if (Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
                 if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                     targetHit.transform.gameObject.SetActive(false);
                 }
             }
+
+            // Reset the civilianToShoot and the rotation of the barrel
             shootCivilian = false;
             civilianToShoot = null;
             gunHole.transform.rotation = gunHoleRotation;
         }
     }
 
+    // This rotates a transform with a range of -inaccuration to inaccuration + 1
     private void Inaccuracy(ref Transform transform, float inaccuration) {
         Vector3 rotation = new Vector3(UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1));
         transform.Rotate(rotation);
     }
 
+    // This sheaths the knife, playing the animation in reverse and playing the audio clip
     private void SheatheKnife() {
         knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
         knifeAudio.Play();
         knifeAnimations.SheatheKnife();
     }
 
+    // This draws the knife
     private void DrawKnife() {
         knifeAnimations.drawKnife();
     }
 
+    // This sheathes the gun
     private void SheatheGun() {
         gunAnimations.sheathGun();
     }
 
+    // This draws the gun
     private void DrawGun() {
         gunAnimations.drawGun();
     }
 
+    // This stabs you
     private void Stab() {
         knifeAnimations.Stab();
     }
 
+    // This slashes you
     private void Slash() {
         knifeAnimations.Slash();
     }
 
+    // This walks the target to you
     private void WalkToTarget() {
         // Rotates the target
         Quaternion temp = transform.rotation;
@@ -256,6 +272,7 @@ public class TargetControl : MonoBehaviour {
             float distanceThisSecondZ = deltaZ / factor;
             float distanceThisFrameZ = distanceThisSecondZ * Time.deltaTime;
 
+            // Insert acceleration. The acceleration's range is 0 < acceleration < 1
             if (walkToTarget) {
                 if (currentAcceleration < 1) {
                     currentAcceleration += acceleration;
