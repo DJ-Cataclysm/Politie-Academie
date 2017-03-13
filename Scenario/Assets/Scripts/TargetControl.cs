@@ -149,8 +149,11 @@ public class TargetControl : MonoBehaviour {
         }
 
         if (!turnToCivilian && shootCivilian) {
+            Quaternion gunHoleRotation = gunHole.transform.rotation;
+            Inaccuracy(ref gunHole, 9);
             Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
             RaycastHit targetHit;
+            Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
             if(Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
                 if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                     targetHit.transform.gameObject.SetActive(false);
@@ -158,7 +161,14 @@ public class TargetControl : MonoBehaviour {
             }
             shootCivilian = false;
             civilianToShoot = null;
+            gunHole.transform.rotation = gunHoleRotation;
         }
+    }
+
+    private void Inaccuracy(ref Transform transform, float inaccuration) {
+        Vector3 rotation = new Vector3(UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1), UnityEngine.Random.Range(inaccuration * -1, inaccuration + 1));
+        Debug.Log(rotation);
+        transform.Rotate(rotation);
     }
 
     private void SheatheKnife() {
