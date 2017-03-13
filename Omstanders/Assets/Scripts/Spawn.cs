@@ -18,7 +18,7 @@ public class Spawn : MonoBehaviour {
 
     void Start () {
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
-        print("Amount spawned is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
+        print("Amount to spawn is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
 
         for (int i = 0; i < amountToSpawn; i++) {
             // For each npc to place, select a random starting point.
@@ -34,7 +34,6 @@ public class Spawn : MonoBehaviour {
                         1,
                         GameObject.Find(spawnpoint).transform.position.z),
                         Quaternion.identity, parent));
-                //npcs[i].
                 else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
                     npcs.Add(Instantiate(npc, new Vector3(
                         GameObject.Find(spawnpoint).transform.position.x,

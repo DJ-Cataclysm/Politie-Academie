@@ -23,7 +23,7 @@ public class SampleAgentScript : MonoBehaviour {
             this.gameObject.GetComponent<Renderer>().material = mats[randomMat];
         }
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, 5));
+        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
     }
 	
 	void Update () {
