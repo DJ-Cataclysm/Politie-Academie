@@ -127,7 +127,7 @@ public class TargetControl : MonoBehaviour {
         if (shootCivilian || turnToCivilian) ShootCivilian();
 
         if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
-            if (Vector3.Distance(target.transform.position, transform.position) <= 1) Stab();
+            if (Vector3.Distance(target.transform.position, transform.position) <= 1.4) Stab();
         }
     }
 
