@@ -20,6 +20,12 @@ namespace Assets.Scripts {
         public readonly List<Transform> civilianList = new List<Transform>();
 
 
+        public ShootCivilian(TargetControl targetControl) {
+            this.targetControl = targetControl;
+            //this.gunAnimations = gunAnimations;
+        }
+
+
         public ShootCivilian(TargetControl targetControl, GunAnimations gunAnimations) {
             this.targetControl = targetControl;
             this.gunAnimations = gunAnimations;
@@ -68,31 +74,31 @@ namespace Assets.Scripts {
             }
         }
 
-        public void shootAtCivilian(bool hit, ref bool gunDrawn, Transform gunHole) {
-            if (!gunDrawn) {
-                gunAnimations.drawGun();
-                gunDrawn = true;
-            } else if (!gunAnimations.animationIsPlaying("draw")) {
-                shoot = false;
+        //public void shootAtCivilian(bool hit, ref bool gunDrawn, Transform gunHole) {
+        //    if (!gunDrawn) {
+        //        gunAnimations.drawGun();
+        //        gunDrawn = true;
+        //    } else if (!gunAnimations.animationIsPlaying("draw")) {
+        //        shoot = false;
 
-                targetControl.shootAudio.clip = targetControl.shootAudioClips[UnityEngine.Random.Range(0, targetControl.shootAudioClips.Count)];
-                targetControl.shootAudio.Play();
+        //        //targetControl.shootAudio.clip = targetControl.shootAudioClips[UnityEngine.Random.Range(0, targetControl.shootAudioClips.Count)];
+        //        //targetControl.shootAudio.Play();
 
-                if (hit) {
+        //        if (hit) {
 
-                    Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
-                    RaycastHit targetHit;
+        //            Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
+        //            RaycastHit targetHit;
 
-                    // Shoot the bullet, and if it hits, check if it is a civilian
-                    if (Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
-                        if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
-                            turnToCivilian = false;
-                            civilianToShoot = null;
-                            targetHit.transform.gameObject.SetActive(false);
-                        }
-                    }
-                }
-            }
-        }
+        //            // Shoot the bullet, and if it hits, check if it is a civilian
+        //            if (Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
+        //                if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
+        //                    turnToCivilian = false;
+        //                    civilianToShoot = null;
+        //                    targetHit.transform.gameObject.SetActive(false);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

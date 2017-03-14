@@ -10,7 +10,8 @@ public class Spawn : MonoBehaviour {
     private int currentTargetIndex = 0;
 
     // Variables relating to the different types of NPCs, these will be used to spawn them.
-    private List<Transform> npcs = new List<Transform>();
+    public List<Transform> npcs = new List<Transform>();
+    public List<Transform> npcsToTransfer = new List<Transform>();
     public Transform npc;
     public Transform enemy;
     public Transform parent;
@@ -21,7 +22,9 @@ public class Spawn : MonoBehaviour {
     public float amountEnemySpawned = 0;
     public float amountIdleSpawned = 0;
 
-    void Start () {
+    public TargetControl targetControl;
+
+    void Start() {
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
         print("Amount to spawn is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
 
@@ -45,20 +48,20 @@ public class Spawn : MonoBehaviour {
                         1,
                         Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
                         Quaternion.identity, parent));
-
-            // After the enemies, spawn the idle NPCs in the same way
-            } else if (i >= amountEnemySpawned && i < (amountEnemySpawned+amountIdleSpawned)) { 
+                //npcs[i].GetComponent<TargetControl>().ta;
+                // After the enemies, spawn the idle NPCs in the same way
+            } else if (i >= amountEnemySpawned && i < (amountEnemySpawned + amountIdleSpawned)) {
                 npcs.Add(Instantiate(npc, new Vector3(
-                    GameObject.Find("IdleSpawnpoint"+(i-amountNormalSpawned+1)).transform.position.x, 
-                    1, 
-                    GameObject.Find("IdleSpawnpoint"+(i-amountNormalSpawned+1)).transform.position.z), 
+                    GameObject.Find("IdleSpawnpoint" + (i - amountNormalSpawned + 1)).transform.position.x,
+                    1,
+                    GameObject.Find("IdleSpawnpoint" + (i - amountNormalSpawned + 1)).transform.position.z),
                     Quaternion.identity, parent));
                 //SampleAgentScript test = npcs[i].GetComponent<SampleAgentScript>();
                 //test.isIdle = true;
                 Destroy(npcs[i].GetComponent<NavMeshAgent>());
                 Destroy(npcs[i].GetComponent<SampleAgentScript>());
 
-            // After the idle NPCs, spawn the normal NPCs in the same way.
+                // After the idle NPCs, spawn the normal NPCs in the same way.
             } else if (i >= (amountEnemySpawned + amountIdleSpawned) && i < amountToSpawn) {
                 if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
                     npcs.Add(Instantiate(npc,
@@ -75,12 +78,19 @@ public class Spawn : MonoBehaviour {
                         Quaternion.identity, parent));
             }
         }
+
+        for (int i = (int)amountEnemySpawned; i < npcs.Count; i++) npcsToTransfer.Add(npcs[i - 1]);
+
+        for (int i = 0; i < amountEnemySpawned; i++) {
+            npcs[i].GetComponent<TargetControl>().AnnesFillList(npcsToTransfer);
+        }
+
         print("npcs.count: " + npcs.Count);
     }
 
     private void Update() {
         // If the keys "1", "2", "3", or "4" is pressed, that key is sent to the current target's script. Depending on the target, they (could) act differently.
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
+        if(Input.anyKeyDown)
             currentTarget.GetComponent<TriggerAction>().FireAction(Input.inputString);
 
         // If LeftArrow or RightArrow are pressed, shut off the current target's camera, advance to the next target, and switch on its camera.
@@ -95,7 +105,7 @@ public class Spawn : MonoBehaviour {
             currentTarget.GetChild(0).transform.gameObject.SetActive(false);
             currentTargetIndex--;
             if (currentTargetIndex < 0)
-                currentTargetIndex = (int)(amountEnemySpawned-1);
+                currentTargetIndex = (int)(amountEnemySpawned - 1);
         }
 
         // Set the currentTarget, and turn its camera on.

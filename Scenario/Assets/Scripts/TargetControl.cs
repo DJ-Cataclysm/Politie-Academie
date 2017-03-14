@@ -22,7 +22,8 @@ public class TargetControl : MonoBehaviour {
     
     private ShootCivilian shootCivilian;
     private MoveTarget moveTarget;
-    
+
+    /*
     public AudioSource walkAudio;
     public AudioSource knifeAudio;
     public AudioSource shootAudio;
@@ -34,16 +35,19 @@ public class TargetControl : MonoBehaviour {
     public List<AudioClip> drawKnifeAudioClips = new List<AudioClip>();
     public List<AudioClip> walkAudioClips = new List<AudioClip>();
     public List<AudioClip> shootAudioClips = new List<AudioClip>();
+    */
+
+    private List<Transform> civilianList = new List<Transform>();
 
     public Transform civilians;
     public Transform gunHole;
 
-    public Transform knife;
+    //public Transform knife;
 
-    public Transform target;
-    public float maxMovementSpeed;
-    public float runFactor;
-    public float acceleration;
+    //public Transform target;
+    //public float maxMovementSpeed;
+    //public float runFactor;
+    //public float acceleration;
 
     //public float targetAccuracy;
     public float maxDistanceToCivilian;
@@ -53,19 +57,36 @@ public class TargetControl : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        shootCivilian = new ShootCivilian(this, gunAnimations);
+        //shootCivilian = new ShootCivilian(this, gunAnimations);
+        shootCivilian = new ShootCivilian(this);
         moveTarget = new MoveTarget(this);
 
-        walkAudio = GetComponent<AudioSource>();
+        //walkAudio = GetComponent<AudioSource>();
 
         // This makes sure that the target always has a max movement speed incase the user sets it to low
-        if (maxMovementSpeed <= 0) {
-            maxMovementSpeed = 1.5f;
-        }
+        //if (maxMovementSpeed <= 0) {
+        //    maxMovementSpeed = 1.5f;
+        //}
 
         // Gets all the civilians and puts them in a list that's easier to handle
-        foreach (Transform child in civilians.transform) {
-            shootCivilian.addCivilian(child);
+        //foreach (Transform child in civilians.transform) {
+        //    if (child.gameObject.tag.Equals("Civilian")) {
+        //        shootCivilian.addCivilian(child);
+        //    }
+        //}
+    }
+
+    public void AnnesFillList(List<Transform> list) {
+        
+        this.civilianList = list;
+        Debug.Log(civilianList.Count);
+    }
+    
+    public void fillCivilianList(List<Transform> list) {
+        foreach (Transform child in list) {
+            if (child.gameObject.tag.Equals("Civilian")) {
+                shootCivilian.addCivilian(child);
+            }
         }
     }
 
@@ -76,38 +97,38 @@ public class TargetControl : MonoBehaviour {
         if (Input.GetKeyDown(keyInput_targetDrawsKnife) && !Input.GetKeyDown(KeyCode.RightAlt)) { // If you press the left control, he draws the knife
             //Debug.Log("Drawing/Sheating knife");
             if (!surrendered && !gunDrawn) {    // Make sure he hasn't drawn his gun or has surrenderd
-                if (!knifeAnimations.AnimationIsPlaying("draw")) { // The target cannot be already drawing his knife
+                //if (!knifeAnimations.AnimationIsPlaying("draw")) { // The target cannot be already drawing his knife
                     if (!knifeDrawn) {
                         knifeDrawn = true;
-                        DrawKnife();
+                        //DrawKnife();
                     } else if (knifeDrawn) {
                         knifeDrawn = false;
-                        SheatheKnife();
+                        //SheatheKnife();
                     }
-                }
+                //}
             }
         }
         if (Input.GetKeyDown(keyInput_targetDrawsGun) && !Input.GetKeyDown(KeyCode.RightAlt)) {
             if (!surrendered && !knifeDrawn) {
-                if (!gunAnimations.animationIsPlaying("draw")) {
+                //if (!gunAnimations.animationIsPlaying("draw")) {
                     if (!gunDrawn) {
                         gunDrawn = true;
-                        DrawGun();
+                        //DrawGun();
                     } else if (gunDrawn) {
                         gunDrawn = false;
-                        SheatheGun();
+                        //SheatheGun();
                     }
-                }
+                //}
             }
         }
         if (Input.GetKeyDown(keyInput_targetsurrender)) {
             if (!knifeDrawn) {
                 if (!surrendered) {
                     surrendered = true;
-                    targetAnimations.surrender();
+                    //targetAnimations.surrender();
                 } else {
                     surrendered = false;
-                    targetAnimations.aggresive();
+                    //targetAnimations.aggresive();
                 }
             }
         }
@@ -130,24 +151,24 @@ public class TargetControl : MonoBehaviour {
             }
         }
 
-        if (knifeDrawn) {
-            if (knifeAnimations.GetAnimationTime("draw") >= 0.5 && knifeAnimations.GetAnimationTime("draw") <= 0.52) {
-                knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
-                knifeAudio.Play();
-            }
-        }
+        //if (knifeDrawn) {
+        //    if (knifeAnimations.GetAnimationTime("draw") >= 0.5 && knifeAnimations.GetAnimationTime("draw") <= 0.52) {
+        //        knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
+        //        knifeAudio.Play();
+        //    }
+        //}
     }
 
     void FixedUpdate() {
-        if (moveTarget.walkToTarget || moveTarget.currentAcceleration > 0) moveTarget.WalkToTarget(target, transform);
+        //if (moveTarget.walkToTarget || moveTarget.currentAcceleration > 0) moveTarget.WalkToTarget(target, transform);
 
         if (shootCivilian.turnToCivilian) shootCivilian.turnTargetToCivilian(transform);
 
-        if (shootCivilian.shoot) shootCivilian.shootAtCivilian(shootCivilian.hitCivilian, ref gunDrawn, gunHole);
+        //if (shootCivilian.shoot) shootCivilian.shootAtCivilian(shootCivilian.hitCivilian, ref gunDrawn, gunHole);
 
-        if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
-            if (Vector3.Distance(target.transform.position, transform.position) <= stabDistance) Stab();
-        }
+        //if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
+        //    if (Vector3.Distance(target.transform.position, transform.position) <= stabDistance) Stab();
+        //}
     }
 
     // This function makes the target shoot at the civilian
@@ -162,36 +183,36 @@ public class TargetControl : MonoBehaviour {
     }
 
     // This sheaths the knife, playing the animation in reverse and playing the audio clip
-    private void SheatheKnife() {
-        knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
-        knifeAudio.Play();
-        knifeAnimations.SheatheKnife();
-    }
+    //private void SheatheKnife() {
+    //    knifeAudio.clip = drawKnifeAudioClips[UnityEngine.Random.Range(0, drawKnifeAudioClips.Count)];
+    //    knifeAudio.Play();
+    //    knifeAnimations.SheatheKnife();
+    //}
 
-    // This draws the knife
-    public void DrawKnife() {
-        knifeAnimations.drawKnife();
-    }
+    //// This draws the knife
+    //public void DrawKnife() {
+    //    knifeAnimations.drawKnife();
+    //}
 
-    // This sheathes the gun
-    private void SheatheGun() {
-        gunAnimations.sheathGun();
-    }
+    //// This sheathes the gun
+    //private void SheatheGun() {
+    //    gunAnimations.sheathGun();
+    //}
 
-    // This draws the gun
-    private void DrawGun() {
-        gunAnimations.drawGun();
-    }
+    //// This draws the gun
+    //private void DrawGun() {
+    //    gunAnimations.drawGun();
+    //}
 
-    // This stabs you
-    private void Stab() {
-        knifeAnimations.Stab();
-    }
+    //// This stabs you
+    //private void Stab() {
+    //    knifeAnimations.Stab();
+    //}
 
-    // This slashes you
-    private void Slash() {
-        knifeAnimations.Slash();
-    }
+    //// This slashes you
+    //private void Slash() {
+    //    knifeAnimations.Slash();
+    //}
 
     
 
