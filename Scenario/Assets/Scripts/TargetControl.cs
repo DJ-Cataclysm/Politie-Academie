@@ -51,9 +51,6 @@ public class TargetControl : MonoBehaviour {
     public float maxDistance;
     public float stabDistance;
 
-    // Gets the difference between 2 floats
-    
-
     // Use this for initialization
     void Start() {
         shootCivilian = new ShootCivilian(this, gunAnimations);
