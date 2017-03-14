@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class TriggerAction : MonoBehaviour {
 
-    //public
-
     public void FireAction(string s) {
-        print("action fired :>");
-        gameObject.GetComponent<Renderer>().material.color = Color.white;
+        switch (s) {
+            case "1":
+            break;
+            case "2":
+            break;
+            case "3":
+            break;
+            case "4":
+            break;
+        }
     }
 }

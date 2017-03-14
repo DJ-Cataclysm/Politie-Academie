@@ -5,21 +5,21 @@ using UnityEngine.AI;
 
 public class Spawn : MonoBehaviour {
 
+    // Variables relating to the current target. These affect the Target Cam, and are determined by their index in the npcs List item.
     private Transform currentTarget;
     private int currentTargetIndex = 0;
 
+    // Variables relating to the different types of NPCs, these will be used to spawn them.
     private List<Transform> npcs = new List<Transform>();
     public Transform npc;
     public Transform enemy;
     public Transform parent;
 
+    // Variables relating to the amount of NPCs to spawn. These can be altered from the menu.
     private float amountToSpawn;
     public float amountNormalSpawned = 40;
     public float amountEnemySpawned = 0;
     public float amountIdleSpawned = 0;
-    
-
-     
 
     void Start () {
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
@@ -79,12 +79,15 @@ public class Spawn : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.I))
+        // If the keys "1", "2", "3", or "4" is pressed, that key is sent to the current target's script. Depending on the target, they (could) act differently.
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
             currentTarget.GetComponent<TriggerAction>().FireAction(Input.inputString);
 
+        // If LeftArrow or RightArrow are pressed, shut off the current target's camera, advance to the next target, and switch on its camera.
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             currentTarget.GetChild(0).transform.gameObject.SetActive(false);
             currentTargetIndex++;
+            // A simple "if" to prevent the currentTargetIndex from going out of bounds
             if (currentTargetIndex > (amountEnemySpawned - 1))
                 currentTargetIndex = 0;
         }
@@ -95,6 +98,7 @@ public class Spawn : MonoBehaviour {
                 currentTargetIndex = (int)(amountEnemySpawned-1);
         }
 
+        // Set the currentTarget, and turn its camera on.
         currentTarget = npcs[currentTargetIndex];
         currentTarget.GetChild(0).transform.gameObject.SetActive(true);
     }
