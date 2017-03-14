@@ -2,35 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Scripts;
 
 public class TargetControl : MonoBehaviour {
-    private bool walkToTarget = false;
-    private bool runEnabled = false;
-    private float currentAcceleration = 0;
+    private KeyCode keyInput_targetWalksToPlayer = KeyCode.Space;
+    private KeyCode keyInput_targetRuns = KeyCode.LeftShift;
+    private KeyCode keyInput_targetDrawsKnife = KeyCode.LeftControl;
+    private KeyCode keyInput_targetDrawsGun = KeyCode.RightControl;
+    private KeyCode keyInput_targetsurrender = KeyCode.LeftAlt;
+    private KeyCode keyInput_targetTurnsToCivilian = KeyCode.C;
+    private KeyCode keyInput_targetShootsCivilianHit = KeyCode.H;
+    private KeyCode keyInput_targetShootsCivilianMis = KeyCode.M;
 
     private bool knifeDrawn = false;
 
     private bool gunDrawn = false;
 
     private bool surrendered = false;
-
-    private bool shootCivilian = false;
-
-    private bool turnToCivilian = false;
-    private Transform civilianToShoot;
-
-    private List<Transform> civilianList = new List<Transform>();
-
-    private int activeCivilians {
-        get {
-            int count = 0;
-            foreach (Transform child in civilianList) {
-                if (child.gameObject.activeSelf) count++;
-            }
-            return count;
-        }
-    }
-
+    
+    private ShootCivilian shootCivilian;
+    private MoveTarget moveTarget;
+    
     public AudioSource walkAudio;
     public AudioSource knifeAudio;
     public AudioSource shootAudio;
@@ -53,17 +45,20 @@ public class TargetControl : MonoBehaviour {
     public float runFactor;
     public float acceleration;
 
-    public float targetAccuracy;
+    //public float targetAccuracy;
     public float maxDistanceToCivilian;
 
     public float maxDistance;
     public float stabDistance;
 
     // Gets the difference between 2 floats
-    Func<float, float, float> getDelta = (a, b) => a - b;
+    
 
     // Use this for initialization
     void Start() {
+        shootCivilian = new ShootCivilian(this, gunAnimations);
+        moveTarget = new MoveTarget(this);
+
         walkAudio = GetComponent<AudioSource>();
 
         // This makes sure that the target always has a max movement speed incase the user sets it to low
@@ -73,15 +68,15 @@ public class TargetControl : MonoBehaviour {
 
         // Gets all the civilians and puts them in a list that's easier to handle
         foreach (Transform child in civilians.transform) {
-            civilianList.Add(child);
+            shootCivilian.addCivilian(child);
         }
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) walkToTarget = !walkToTarget; // If you press space, it starts or stops walking to you
-        if (Input.GetKeyDown(KeyCode.LeftShift)) runEnabled = !runEnabled; // If you press the left shift, the target will run instead of walk
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !Input.GetKeyDown(KeyCode.RightAlt)) { // If you press the left control, he draws the knife
+        if (Input.GetKeyDown(keyInput_targetWalksToPlayer)) moveTarget.walkToTarget = !moveTarget.walkToTarget; // If you press space, it starts or stops walking to you
+        if (Input.GetKeyDown(keyInput_targetRuns)) moveTarget.runEnabled = !moveTarget.runEnabled; // If you press the left shift, the target will run instead of walk
+        if (Input.GetKeyDown(keyInput_targetDrawsKnife) && !Input.GetKeyDown(KeyCode.RightAlt)) { // If you press the left control, he draws the knife
             //Debug.Log("Drawing/Sheating knife");
             if (!surrendered && !gunDrawn) {    // Make sure he hasn't drawn his gun or has surrenderd
                 if (!knifeAnimations.AnimationIsPlaying("draw")) { // The target cannot be already drawing his knife
@@ -95,7 +90,7 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.RightControl) && !Input.GetKeyDown(KeyCode.RightAlt)) {
+        if (Input.GetKeyDown(keyInput_targetDrawsGun) && !Input.GetKeyDown(KeyCode.RightAlt)) {
             if (!surrendered && !knifeDrawn) {
                 if (!gunAnimations.animationIsPlaying("draw")) {
                     if (!gunDrawn) {
@@ -108,7 +103,7 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftAlt)) {
+        if (Input.GetKeyDown(keyInput_targetsurrender)) {
             if (!knifeDrawn) {
                 if (!surrendered) {
                     surrendered = true;
@@ -119,10 +114,22 @@ public class TargetControl : MonoBehaviour {
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.RightAlt)) {
-            if (gunDrawn) {
-                turnToCivilian = true;
-                shootCivilian = true;
+        if (Input.GetKeyDown(keyInput_targetTurnsToCivilian)) {
+            //if (gunDrawn) {
+            shootCivilian.turnToCivilian = true;
+            shootCivilian.civilianToShoot = null;
+            //}
+        }
+        if (Input.GetKeyDown(keyInput_targetShootsCivilianHit)) {
+            if (!knifeDrawn && !surrendered) {
+                shootCivilian.shoot = true;
+                shootCivilian.hitCivilian = true;
+            }
+        }
+        if (Input.GetKeyDown(keyInput_targetShootsCivilianMis)) {
+            if (!knifeDrawn && !surrendered) {
+                shootCivilian.shoot = true;
+                shootCivilian.hitCivilian = false;
             }
         }
 
@@ -135,9 +142,11 @@ public class TargetControl : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (walkToTarget || currentAcceleration > 0) WalkToTarget();
+        if (moveTarget.walkToTarget || moveTarget.currentAcceleration > 0) moveTarget.WalkToTarget(target, transform);
 
-        if (shootCivilian || turnToCivilian) ShootCivilian();
+        if (shootCivilian.turnToCivilian) shootCivilian.turnTargetToCivilian(transform);
+
+        if (shootCivilian.shoot) shootCivilian.shootAtCivilian(shootCivilian.hitCivilian, ref gunDrawn, gunHole);
 
         if (knifeDrawn && !knifeAnimations.AnimationIsPlaying("draw")) {
             if (Vector3.Distance(target.transform.position, transform.position) <= stabDistance) Stab();
@@ -145,58 +154,9 @@ public class TargetControl : MonoBehaviour {
     }
 
     // This function makes the target shoot at the civilian
-    private void ShootCivilian() {
-        int count = 0;
+    
 
-        // This while-loop gets a random civilian, but it makes sure that the civilian is in range and active. Also, after 5 tries, it stops
-        while (civilianToShoot == null && activeCivilians > 0) {
-            Transform temp = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
-            if (Vector3.Distance(transform.position, temp.position) < maxDistanceToCivilian && temp.gameObject.activeSelf) civilianToShoot = temp;
-            count++;
-            if (count >= 5) {
-                break;
-            }
-        }
-
-        // This turns the target to the civilian.
-        if (turnToCivilian) {
-            Quaternion temp = transform.rotation;
-            rotateToTarget(civilianToShoot.transform, transform.position, ref temp, 5f);
-            transform.rotation = temp;
-
-            Vector3 targetToCivilian = (civilianToShoot.transform.position - transform.position).normalized;
-            float dot = Vector3.Dot(targetToCivilian, transform.forward);
-            if (dot < 0.001 && dot > -0.001) {
-                turnToCivilian = false;
-            }
-        }
-
-        // If the target is done rotating, is still ordered to shoot the civilian and there is a civilian to shoot, shoot
-        if (!turnToCivilian && shootCivilian && civilianToShoot != null) {
-            // Rotate the barrel slightly for inaccuracy
-            Quaternion gunHoleRotation = gunHole.transform.rotation;
-            Inaccuracy(ref gunHole, targetAccuracy);
-            
-            Vector3 forward = gunHole.transform.TransformDirection(Vector3.forward);
-            RaycastHit targetHit;
-            //Debug.DrawRay(gunHole.transform.position, forward, Color.red, 10);
-
-            shootAudio.clip = shootAudioClips[UnityEngine.Random.Range(0, shootAudioClips.Count)];
-            shootAudio.Play();
-
-            // Shoot the bullet, and if it hits, check if it is a civilian
-            if (Physics.Raycast(gunHole.transform.position, forward, out targetHit)) {
-                if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
-                    targetHit.transform.gameObject.SetActive(false);
-                }
-            }
-
-            // Reset the civilianToShoot and the rotation of the barrel
-            shootCivilian = false;
-            civilianToShoot = null;
-            gunHole.transform.rotation = gunHoleRotation;
-        }
-    }
+    
 
     // This rotates a transform with a range of -inaccuration to inaccuration + 1
     private void Inaccuracy(ref Transform transform, float inaccuration) {
@@ -212,7 +172,7 @@ public class TargetControl : MonoBehaviour {
     }
 
     // This draws the knife
-    private void DrawKnife() {
+    public void DrawKnife() {
         knifeAnimations.drawKnife();
     }
 
@@ -236,64 +196,10 @@ public class TargetControl : MonoBehaviour {
         knifeAnimations.Slash();
     }
 
-    // This walks the target to you
-    private void WalkToTarget() {
-        // Rotates the target
-        Quaternion temp = transform.rotation;
-        rotateToTarget(target, transform.position, ref temp, 5f);
-        transform.rotation = temp;
-
-        // Gets the distance between you and the target
-        float distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
-
-        //Debug.Log(distanceToTarget + " - " + maxDistance);
-
-        // If the target is outside the maxDistance range, move closer
-        if (distanceToTarget > maxDistance) {
-            // If the walk audio is not playing, play it
-            if (!walkAudio.isPlaying) {
-                walkAudio.clip = walkAudioClips[UnityEngine.Random.Range(0, walkAudioClips.Count)];
-                walkAudio.Play();
-            }
-
-            // A float that holds how many seconds the target takes to get to you
-            float factor = distanceToTarget / (runEnabled ? maxMovementSpeed * runFactor : maxMovementSpeed);
-
-            // The difference in X and Z between you and the target
-            float deltaX = getDelta(target.position.x, transform.position.x);
-            float deltaZ = getDelta(target.position.z, transform.position.z);
-
-            // Gets how much units the target moves on the X-axis this second.
-            float distanceThisSecondX = deltaX / factor;
-            //gets how much units the target moves on the Y-axis this frame.
-            float distanceThisFrameX = distanceThisSecondX * Time.deltaTime;
-
-            // Same as above but then for the Z-axis
-            float distanceThisSecondZ = deltaZ / factor;
-            float distanceThisFrameZ = distanceThisSecondZ * Time.deltaTime;
-
-            // Insert acceleration. The acceleration's range is 0 < acceleration < 1
-            if (walkToTarget) {
-                if (currentAcceleration < 1) {
-                    currentAcceleration += acceleration;
-                    if (currentAcceleration > 1) currentAcceleration = 1;
-                }
-            } else {
-                if (currentAcceleration > 0) {
-                    currentAcceleration -= acceleration;
-                    if (currentAcceleration < 0) {
-                        currentAcceleration = 0;
-                    }
-                }
-            }
-
-            // moves the target
-            transform.position += (new Vector3(distanceThisFrameX, 0, distanceThisFrameZ)) * currentAcceleration;
-        }
-    }
+    
 
     // This function rotates the target towards a specific point.
-    private void rotateToTarget(Transform target, Vector3 selfPosition, ref Quaternion selfRotation, float slerp) {
+    public void rotateToTarget(Transform target, Vector3 selfPosition, ref Quaternion selfRotation, float slerp) {
         if (target != null) {
             Vector3 lookPosition = target.position - selfPosition;
             lookPosition.y = 0;
