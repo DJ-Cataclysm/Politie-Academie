@@ -8,7 +8,7 @@ public class TriggerAction : MonoBehaviour {
     public MissCivilian missCivilian;
     public TurnToTransform turnToTransform;
 
-    public void FireAction(string s) {
+    public void FireAction(string s, List<Transform> npcs) {
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<SampleAgentScript>());
         switch (s) {
@@ -16,13 +16,13 @@ public class TriggerAction : MonoBehaviour {
                 // Total reset
                 break;
             case "1":
-                hitCivilian.shootAtCivilian();
+                hitCivilian.shootAtCivilian(npcs);
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
                 break;
             case "3":
-                turnToTransform.startTurning(transform, transform);
+                //turnToTransform.startTurning(transform, transform);
                 break;
             case "4":
                 break;
