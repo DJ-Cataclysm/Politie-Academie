@@ -14,12 +14,15 @@ public class TriggerAction : MonoBehaviour {
         switch (s) {
             case "0":
                 // Total reset
+                Debug.Log("ButtonPressed: 0");
                 break;
             case "1":
                 hitCivilian.shootAtCivilian(npcs);
+                Debug.Log("ButtonPressed: 1");
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
+                Debug.Log("ButtonPressed: 2");
                 break;
             case "3":
                 //turnToTransform.startTurning(transform, transform);
