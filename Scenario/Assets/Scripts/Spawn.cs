@@ -86,6 +86,7 @@ public class Spawn : MonoBehaviour {
         }
 
         print("npcs.count: " + npcs.Count);
+        currentTarget = npcs[0];
     }
 
     private void Update() {
@@ -110,9 +111,6 @@ public class Spawn : MonoBehaviour {
         }
 
         // Set the currentTarget, and turn its camera on.
-        while (currentTarget.transform.gameObject.activeInHierarchy == false) {
-            currentTargetIndex++;
-        }
         currentTarget = npcs[currentTargetIndex];
         currentTarget.GetChild(0).transform.gameObject.SetActive(true);
     }
