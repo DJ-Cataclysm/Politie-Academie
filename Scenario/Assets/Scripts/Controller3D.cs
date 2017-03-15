@@ -89,6 +89,7 @@ public class Controller3D : MonoBehaviour
         Debug.DrawRay(raycastObject.transform.position, fwd * 50, Color.green);
         if (Physics.Raycast(raycastObject.transform.position, fwd, out objectHit))
         {
+            print(objectHit.transform.gameObject.name);
             if (objectHit.transform.gameObject.tag.Equals("Target"))
             {
                 objectHit.transform.gameObject.SetActive(false);
