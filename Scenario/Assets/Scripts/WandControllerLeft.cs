@@ -6,14 +6,12 @@ using Valve.VR;
 
 public class WandControllerLeft : MonoBehaviour
 {
-
+    public GameObject flashlight;
 
     private EVRButtonId triggerButton = EVRButtonId.k_EButton_SteamVR_Touchpad;
     public bool triggerButtonDown = false;
     public bool triggerButtonUp = false;
     public bool triggerButtonPressed = false;
-
-    public Controller3D controller3D;
 
     private SteamVR_TrackedObject trackedObject = new SteamVR_TrackedObject();
     private SteamVR_Controller.Device controller { get { return SteamVR_Controller.Input((int)trackedObject.index); } }
@@ -44,13 +42,15 @@ public class WandControllerLeft : MonoBehaviour
 
         if (triggerButtonDown)
         {
-            if (controller3D != null && !controller3D.gameObject.GetComponentInChildren<Light>().enabled)
+            Debug.Log("Triggered");
+            if (flashlight.GetComponent<Light>().enabled)
             {
-                controller3D.gameObject.GetComponentInChildren<Light>().enabled = true;
+                Debug.Log("Licht uit");
+                flashlight.GetComponent<Light>().enabled = false;
             }
             else
             {
-                controller3D.gameObject.GetComponentInChildren<Light>().enabled = false;
+                flashlight.GetComponent<Light>().enabled = true;
             }
         }
 
