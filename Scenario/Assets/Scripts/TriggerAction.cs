@@ -8,6 +8,14 @@ public class TriggerAction : MonoBehaviour {
     public MissCivilian missCivilian;
     public TurnToTransform turnToTransform;
 
+    /// <summary>
+    /// !!!!!!!!!!!!!!! READ THIS BEFORE WORKING ON THIS SCRIPT!!!!!!!!!!!!!!!!!!!!
+    /// 
+    /// This script and its one function (FireAction) are used to trigger specific actions for the currently selected target.
+    /// (To be continued)
+    /// </summary>
+
+
     public void FireAction(string s, List<Transform> npcs) {
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<SampleAgentScript>());
