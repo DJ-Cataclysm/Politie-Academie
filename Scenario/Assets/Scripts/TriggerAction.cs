@@ -7,6 +7,7 @@ public class TriggerAction : MonoBehaviour {
     public HitCivilian hitCivilian;
     public MissCivilian missCivilian;
     public TurnToTransform turnToTransform;
+    public SampleAgentScript sampleAgentScript;
 
     /// <summary>
     /// !!!!!!!!!!!!!!! READ THIS BEFORE WORKING ON THIS SCRIPT!!!!!!!!!!!!!!!!!!!!
@@ -17,20 +18,22 @@ public class TriggerAction : MonoBehaviour {
 
 
     public void FireAction(string s, List<Transform> npcs) {
-        Destroy(GetComponent<NavMeshAgent>());
-        Destroy(GetComponent<SampleAgentScript>());
+
         switch (s) {
             case "0":
                 // Total reset
                 break;
             case "1":
                 hitCivilian.shootAtCivilian(npcs);
+                Destroy(GetComponent<NavMeshAgent>());
+                Destroy(GetComponent<SampleAgentScript>());
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
                 break;
             case "3":
-                //turnToTransform.startTurning(transform, transform);
+                sampleAgentScript.walkToPlayer = !sampleAgentScript.walkToPlayer;
+                if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer();
                 break;
             case "4":
                 break;

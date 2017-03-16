@@ -9,9 +9,10 @@ public class SampleAgentScript : MonoBehaviour {
     public GameObject target;
     NavMeshAgent agent;
     public int landmarkAmount;
-    //public Transform landmarks;
-    public LandmarksControl landmarksControl;
     public bool isIdle = false;
+
+    public Transform player;
+    public bool walkToPlayer;
 
     public Material mat1;
     public Material mat2;
@@ -19,8 +20,7 @@ public class SampleAgentScript : MonoBehaviour {
     public Material mat4;
     List<Material> mats = new List<Material>();
 
-    void Start () {
-
+    void Start() {
         if (this.gameObject.tag != "Target") {
             mats.Add(mat1); mats.Add(mat2); mats.Add(mat3); mats.Add(mat4);
             int randomMat = Random.Range(0, 4);
@@ -29,14 +29,24 @@ public class SampleAgentScript : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
     }
-	
-	void Update () {
+
+    void Update() {
         if (!isIdle) {
             agent.SetDestination(target.transform.position);
-            if (agent.remainingDistance < 2) {
+            if (agent.remainingDistance < 2 && !walkToPlayer) {
+                Debug.Log("New landmark destination");
                 target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
                 agent.SetDestination(target.transform.position);
+            }else if (agent.remainingDistance < 2 && walkToPlayer) {
+                WalkToPlayer();
             }
         }
-	}
+    }
+
+    public void WalkToPlayer() {
+        if (!isIdle) {
+            agent.SetDestination(player.transform.position);
+            Debug.Log("new destination: " + agent.destination);
+        }
+    }
 }
