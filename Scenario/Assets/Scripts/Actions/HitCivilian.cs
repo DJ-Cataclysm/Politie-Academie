@@ -17,6 +17,7 @@ public class HitCivilian : MonoBehaviour {
         isTurning = true;
 
         // and shoot
+        GetComponent<AudioSource>().Play();
         Invoke("ShootGun", 1.0f);
     }
 

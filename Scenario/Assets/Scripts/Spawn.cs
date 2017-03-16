@@ -92,7 +92,6 @@ public class Spawn : MonoBehaviour {
             if (i % 8 == 0)
                 npcs[i].GetComponent<AudioSource>().enabled = true;
         }
-
     }
 
     private void Update() {
