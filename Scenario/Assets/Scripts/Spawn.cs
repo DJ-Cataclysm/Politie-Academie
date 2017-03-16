@@ -9,6 +9,8 @@ public class Spawn : MonoBehaviour {
     private Transform currentTarget;
     private int currentTargetIndex = 0;
 
+    private int landmarkAmount = 0;
+
     // Variables relating to the different types of NPCs, these will be used to spawn them.
     public List<Transform> npcs = new List<Transform>();
     public List<Transform> npcsToTransfer = new List<Transform>();
@@ -24,7 +26,11 @@ public class Spawn : MonoBehaviour {
 
     public TargetControl targetControl;
 
+    public Transform landmarks;
+
     void Start() {
+        foreach (Transform child in landmarks) landmarkAmount++;
+
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
         print("Amount to spawn is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
 
@@ -36,20 +42,23 @@ public class Spawn : MonoBehaviour {
             if (i < amountEnemySpawned) {
                 // Depending on the selected starting point, randomize either the X or the Z coordinate, while making sure that the randomized property falls within the range of the other spawnpoints.
                 // This causes them to spawn in a nice rectangle (or however the spawnpoints are set up)
-                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
+                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3") {
                     npcs.Add(Instantiate(enemy, new Vector3(
                         Random.Range(GameObject.Find("Spawnpoint4").transform.position.x, GameObject.Find("Spawnpoint2").transform.position.x),
                         1,
                         GameObject.Find(spawnpoint).transform.position.z),
                         Quaternion.identity, parent));
-                else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
+                    npcs[npcs.Count - 1].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                } else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4") {
                     npcs.Add(Instantiate(enemy, new Vector3(
                         GameObject.Find(spawnpoint).transform.position.x,
                         1,
                         Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
                         Quaternion.identity, parent));
-                //npcs[i].GetComponent<TargetControl>().ta;
-                // After the enemies, spawn the idle NPCs in the same way
+                    npcs[npcs.Count - 1].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                    //npcs[i].GetComponent<TargetControl>().ta;
+                    // After the enemies, spawn the idle NPCs in the same way
+                }
             } else if (i >= amountEnemySpawned && i < (amountEnemySpawned + amountIdleSpawned)) {
                 npcs.Add(Instantiate(npc, new Vector3(
                     GameObject.Find("IdleSpawnpoint" + (i - amountNormalSpawned + 1)).transform.position.x,
@@ -61,21 +70,25 @@ public class Spawn : MonoBehaviour {
                 Destroy(npcs[i].GetComponent<NavMeshAgent>());
                 Destroy(npcs[i].GetComponent<SampleAgentScript>());
 
+                npcs[npcs.Count - 1].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
                 // After the idle NPCs, spawn the normal NPCs in the same way.
             } else if (i >= (amountEnemySpawned + amountIdleSpawned) && i < amountToSpawn) {
-                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
+                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3") {
                     npcs.Add(Instantiate(npc,
                         new Vector3(
                         Random.Range(GameObject.Find("Spawnpoint4").transform.position.x, GameObject.Find("Spawnpoint2").transform.position.x),
                         1,
                         GameObject.Find(spawnpoint).transform.position.z),
                         Quaternion.identity, parent));
-                else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
+                    npcs[npcs.Count - 1].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                } else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4") {
                     npcs.Add(Instantiate(npc, new Vector3(
                         GameObject.Find(spawnpoint).transform.position.x,
                         1,
                         Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
                         Quaternion.identity, parent));
+                    npcs[npcs.Count - 1].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                }
             }
         }
 

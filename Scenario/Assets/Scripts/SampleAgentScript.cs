@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class SampleAgentScript : MonoBehaviour {
+    private int landmarkAmountTemp;
 
     public GameObject target;
     NavMeshAgent agent;
     public int landmarkAmount;
+    //public Transform landmarks;
+    public LandmarksControl landmarksControl;
     public bool isIdle = false;
 
     public Material mat1;
@@ -17,6 +20,7 @@ public class SampleAgentScript : MonoBehaviour {
     List<Material> mats = new List<Material>();
 
     void Start () {
+
         if (this.gameObject.tag != "Target") {
             mats.Add(mat1); mats.Add(mat2); mats.Add(mat3); mats.Add(mat4);
             int randomMat = Random.Range(0, 4);
