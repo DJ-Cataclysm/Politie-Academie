@@ -89,7 +89,7 @@ public class Spawn : MonoBehaviour {
         currentTarget = npcs[0];
         for (int i = (int)amountEnemySpawned+1; i < amountToSpawn; i++)
         {
-            if (i % 5 == 0)
+            if (i % 8 == 0)
                 npcs[i].GetComponent<AudioSource>().enabled = true;
         }
 
