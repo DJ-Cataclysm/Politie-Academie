@@ -12,8 +12,6 @@ namespace Assets.Scripts {
 
         TargetControl targetControl;
 
-
-
         public MoveTarget(TargetControl targetControl) {
             this.targetControl = targetControl;
         }

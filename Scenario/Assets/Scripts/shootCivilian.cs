@@ -10,7 +10,6 @@ namespace Assets.Scripts {
 
         private GunAnimations gunAnimations;
 
-
         public bool shoot = false;
         public bool hitCivilian = false;
 
@@ -18,7 +17,6 @@ namespace Assets.Scripts {
         public Transform civilianToShoot;
 
         public readonly List<Transform> civilianList = new List<Transform>();
-
 
         public ShootCivilian(TargetControl targetControl) {
             this.targetControl = targetControl;
@@ -55,9 +53,7 @@ namespace Assets.Scripts {
                 Transform temp = civilianList[UnityEngine.Random.Range(0, civilianList.Count)];
                 if (Vector3.Distance(transform.position, temp.position) < targetControl.maxDistanceToCivilian && temp.gameObject.activeSelf) civilianToShoot = temp;
                 count++;
-                if (count >= 5) {
-                    break;
-                }
+                if (count >= 5) break;
             }
 
             // This turns the target to the civilian.
@@ -68,9 +64,7 @@ namespace Assets.Scripts {
 
                 Vector3 targetToCivilian = (civilianToShoot.transform.position - transform.position).normalized;
                 float dot = Vector3.Dot(targetToCivilian, transform.forward);
-                if (dot < 0.001 && dot > -0.001) {
-                    turnToCivilian = false;
-                }
+                if (dot < 0.001 && dot > -0.001) turnToCivilian = false;
             }
         }
 

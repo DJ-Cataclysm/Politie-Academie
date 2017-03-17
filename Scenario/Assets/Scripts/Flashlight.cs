@@ -27,14 +27,8 @@ public class Flashlight : MonoBehaviour {
             //getting the reference to the light Object (it must be taged)
             var myLight = GameObject.FindWithTag("Light");
             //disabling the Light
-            if (myLight.GetComponent<Light>().enabled == false)
-            {
-                myLight.GetComponent<Light>().enabled = true;
-            }
-            else
-            {
-                myLight.GetComponent<Light>().enabled = false;
-            }
+            if (myLight.GetComponent<Light>().enabled == false) myLight.GetComponent<Light>().enabled = true;
+            else myLight.GetComponent<Light>().enabled = false;
         }
     }
 }
