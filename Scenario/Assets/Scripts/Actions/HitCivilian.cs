@@ -58,6 +58,7 @@ public class HitCivilian : MonoBehaviour {
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
             if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                 Spawn.getFriendlyNpcList().Remove(targetHit.transform);
+                print(targetHit.transform.name);
                 Destroy(targetHit.transform.gameObject);
             }
         }
