@@ -54,12 +54,6 @@ public class HitCivilian : MonoBehaviour {
         RaycastHit targetHit;
 
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
-<<<<<<< HEAD
-        // Shoot the bullet, and if it hits, check if it is a civilian
-        if (Physics.Raycast(gunhole.transform.position, forward, out targetHit))
-            if (targetHit.transform.gameObject.tag.Equals("Civilian"))
-                Destroy(targetHit.transform.gameObject);
-=======
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
             if (targetHit.transform.gameObject.tag.Equals("Civilian") || targetHit.transform.gameObject.tag.Equals("Target")) {
@@ -68,6 +62,5 @@ public class HitCivilian : MonoBehaviour {
             }
         }
         isTurning = false;
->>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
     }
 }

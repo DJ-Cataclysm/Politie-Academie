@@ -8,11 +8,6 @@ public class MissCivilian : MonoBehaviour {
     private bool isTurning = false;
 
     public void shootAtCivilian() {
-<<<<<<< HEAD
-        // Pretend to Pew Pew Pew
-        GetComponent<AudioSource>().Play();
-        Debug.Log("He Shoots, and... he misses. What a dissapointment");
-=======
 
         int loops = 0;
         while (target == null) {
@@ -53,6 +48,5 @@ public class MissCivilian : MonoBehaviour {
 
     private void stopTurning() {
         isTurning = false;
->>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
     }
 }

@@ -76,10 +76,6 @@ public class TargetControl : MonoBehaviour {
     }
 
     public void AnnesFillList(List<Transform> list) {
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
         this.civilianList = list;
         //Debug.Log(civilianList.Count);
     }

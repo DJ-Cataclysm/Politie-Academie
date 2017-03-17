@@ -22,12 +22,9 @@ public class Spawn : MonoBehaviour {
     public float amountNormalSpawned = 40;
     public float amountEnemySpawned = 0;
     public float amountIdleSpawned = 0;
-<<<<<<< HEAD
+
     public List<AudioClip> clips = new List<AudioClip>();
-    public TargetControl targetControl;
    
-=======
->>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
 
     void Start() {
         foreach (Transform child in GameObject.Find("Landmarks").transform) landmarkAmount++;
@@ -96,13 +93,7 @@ public class Spawn : MonoBehaviour {
 
         for (int i = (int)amountEnemySpawned; i < npcs.Count; i++) npcsToTransfer.Add(npcs[i]);
 
-<<<<<<< HEAD
-        for (int i = 0; i < amountEnemySpawned; i++) npcs[i].GetComponent<TargetControl>().AnnesFillList(npcsToTransfer);
-=======
-        //for (int i = 0; i < amountEnemySpawned; i++) {
-        //    npcs[i].GetComponent<TargetControl>().AnnesFillList(npcsToTransfer);
-        //}
->>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
+
 
         print("npcs.count: " + npcs.Count);
         currentTarget = npcs[0];
