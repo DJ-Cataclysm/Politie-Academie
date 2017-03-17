@@ -21,8 +21,9 @@ public class Spawn : MonoBehaviour {
     public float amountNormalSpawned = 40;
     public float amountEnemySpawned = 0;
     public float amountIdleSpawned = 0;
-
+    public List<AudioClip> clips = new List<AudioClip>();
     public TargetControl targetControl;
+   
 
     void Start() {
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
@@ -86,8 +87,10 @@ public class Spawn : MonoBehaviour {
         print("npcs.count: " + npcs.Count);
         currentTarget = npcs[0];
         for (int i = (int)amountEnemySpawned+1; i < amountToSpawn; i++)
-            if (i % 8 == 0)
+            if (i % 8 == 0) {
                 npcs[i].GetComponent<AudioSource>().enabled = true;
+                //npcs[i].GetComponent<AudioSource>().PlayOneShot();
+            }
     }
 
     private void Update() {
