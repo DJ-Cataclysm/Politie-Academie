@@ -17,17 +17,17 @@ public class SampleAgentScript : MonoBehaviour {
     public Transform player;
     public bool walkToPlayer;
 
-    public Material mat1;
-    public Material mat2;
-    public Material mat3;
-    public Material mat4;
+    //public Material mat1;
+    //public Material mat2;
+    //public Material mat3;
+    //public Material mat4;
     
 
     void Start() {
         if (this.gameObject.tag != "Target") {
-            mats.Add(mat1); mats.Add(mat2); mats.Add(mat3); mats.Add(mat4);
-            int randomMat = Random.Range(0, 4);
-            this.gameObject.GetComponent<Renderer>().material = mats[randomMat];
+            //mats.Add(mat1); mats.Add(mat2); mats.Add(mat3); mats.Add(mat4);
+            //int randomMat = Random.Range(0, 4);
+            //this.gameObject.GetComponent<Renderer>().material = mats[randomMat];
         }
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));

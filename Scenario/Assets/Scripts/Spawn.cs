@@ -53,9 +53,8 @@ public class Spawn : MonoBehaviour {
                         1,
                         Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
                         Quaternion.identity, transform));
-                //npcs[i].GetComponent<TargetControl>().ta;
                 npcs[i].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
-                npcs[i].GetComponent<SampleAgentScript>().player = GameObject.Find("Camera (head)").transform;
+                //npcs[i].GetComponent<SampleAgentScript>().player = GameObject.Find("Camera (head)").transform;
 
                 // After the enemies, spawn the idle NPCs in the same way
             } else if (i >= amountEnemySpawned && i < (amountEnemySpawned + amountIdleSpawned)) {

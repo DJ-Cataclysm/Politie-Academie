@@ -59,13 +59,13 @@ public class Controller3D : MonoBehaviour {
     }
 
     public void ReloadGun() {
-        if (this.shotCount == clipSize) {
+        //if (this.shotCount == clipSize) {
             this.shotCount = 0;
             this.GetComponent<AudioSource>().clip = reload;
             this.GetComponent<AudioSource>().Play();
             anim.GunReload();
-        }
-        else print("Pistool is niet leeg");
+        //}
+        //else print("Pistool is niet leeg");
     }
 
     public void CheckForHit() {

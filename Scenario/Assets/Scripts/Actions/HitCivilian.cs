@@ -34,8 +34,7 @@ public class HitCivilian : MonoBehaviour {
         // Turn to target (in Update)
         isTurning = true;
 
-        // and shoot
-        GetComponent<AudioSource>().Play();
+        // and shoot        
         Invoke("ShootGun", 1.0f);
     }
 
@@ -49,14 +48,15 @@ public class HitCivilian : MonoBehaviour {
     }
 
     private void ShootGun() {
-        Transform gunhole = this.transform.GetChild(1).GetChild(2);
+        GetComponent<AudioSource>().Play();
+        Transform gunhole = this.transform.GetChild(1);
         Vector3 forward = gunhole.transform.TransformDirection(Vector3.forward);
         RaycastHit targetHit;
 
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
-            if (targetHit.transform.gameObject.tag.Equals("Civilian") || targetHit.transform.gameObject.tag.Equals("Target")) {
+            if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
                 Spawn.getFriendlyNpcList().Remove(targetHit.transform);
                 Destroy(targetHit.transform.gameObject);
             }
