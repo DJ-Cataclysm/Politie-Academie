@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class SampleAgentScript : MonoBehaviour {
     private int landmarkAmountTemp;
 
+    List<Material> mats = new List<Material>();
+
+
     public GameObject target;
     NavMeshAgent agent;
     public int landmarkAmount;
@@ -18,7 +21,7 @@ public class SampleAgentScript : MonoBehaviour {
     public Material mat2;
     public Material mat3;
     public Material mat4;
-    List<Material> mats = new List<Material>();
+    
 
     void Start() {
         if (this.gameObject.tag != "Target") {
@@ -34,19 +37,22 @@ public class SampleAgentScript : MonoBehaviour {
         if (!isIdle) {
             agent.SetDestination(target.transform.position);
             if (agent.remainingDistance < 2 && !walkToPlayer) {
-                Debug.Log("New landmark destination");
-                target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
-                agent.SetDestination(target.transform.position);
-            }else if (agent.remainingDistance < 2 && walkToPlayer) {
-                WalkToPlayer();
+                //Debug.Log("New landmark destination");
+                walkToLandmark();
             }
         }
     }
 
     public void WalkToPlayer() {
         if (!isIdle) {
-            agent.SetDestination(player.transform.position);
+            target = player.gameObject;
+            agent.SetDestination(target.transform.position);
             Debug.Log("new destination: " + agent.destination);
         }
+    }
+
+    public void walkToLandmark() {
+        target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+        agent.SetDestination(target.transform.position);
     }
 }

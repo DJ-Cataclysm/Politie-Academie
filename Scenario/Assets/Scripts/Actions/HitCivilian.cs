@@ -4,31 +4,35 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class HitCivilian : MonoBehaviour {
-
-    private List<Transform> npcs = new List<Transform>();
     private Transform target;
     private bool isTurning = false;
 
-    public void shootAtCivilian(List<Transform> npcs) {
-        // Target a civilian first
-        this.npcs = npcs;
-        //target = npcs[Random.Range(0, npcs.Count)];
+    public void shootAtCivilian() {
 
+        int loops = 0;
         while (target == null) {
-            Transform temp = npcs[Random.Range(0, npcs.Count)];
-            if ((Vector3.Distance(temp.position, transform.position) > 20 ||
-                Physics.Linecast(transform.position, temp.position, LayerMask.GetMask("Neutral")))) continue;
+            if (loops > 10) return;
+            loops++;
+            Transform temp = Spawn.getFriendlyNpcList()[Random.Range(0, Spawn.getFriendlyNpcList().Count)];
+            if (temp == null) Debug.Log("nog niemand gevonden");
+            if (Vector3.Distance(temp.position, transform.position) > 20) continue;
+
+            RaycastHit info;
+            if (Physics.Linecast(transform.position, temp.position, out info, LayerMask.GetMask("Neutral"))) {
+                if(!info.transform.tag.Equals("Civilian")) continue;
+            }
+
             if (!temp.gameObject.tag.Equals("Civilian")) continue;
+            
             target = temp;
-            //Debug.Log("test, " + target);
         }
+        if (target == null) return;
 
         Destroy(target.GetComponent<NavMeshAgent>());
         Destroy(target.GetComponent<SampleAgentScript>());
 
         // Turn to target (in Update)
         isTurning = true;
-        //Debug.Log("isTurning: " + isTurning);
 
         // and shoot
         Invoke("ShootGun", 1.0f);
@@ -44,14 +48,18 @@ public class HitCivilian : MonoBehaviour {
     }
 
     private void ShootGun() {
-        Transform gunhole = this.transform.GetChild(1);
+        Transform gunhole = this.transform.GetChild(1).GetChild(2);
         Vector3 forward = gunhole.transform.TransformDirection(Vector3.forward);
         RaycastHit targetHit;
+
+        //transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+        //GetComponent<ParticleSystem>().Play();
 
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
             if (targetHit.transform.gameObject.tag.Equals("Civilian") || targetHit.transform.gameObject.tag.Equals("Target")) {
+                Spawn.getFriendlyNpcList().Remove(targetHit.transform);
                 Destroy(targetHit.transform.gameObject);
             }
         }
