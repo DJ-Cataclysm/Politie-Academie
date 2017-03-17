@@ -7,6 +7,7 @@ public class TriggerAction : MonoBehaviour {
     public HitCivilian hitCivilian;
     public MissCivilian missCivilian;
     public TurnToTransform turnToTransform;
+    public SampleAgentScript sampleAgentScript;
 
     /// <summary>
     /// !!!!!!!!!!!!!!! READ THIS BEFORE WORKING ON THIS SCRIPT!!!!!!!!!!!!!!!!!!!!
@@ -16,23 +17,31 @@ public class TriggerAction : MonoBehaviour {
     /// </summary>
 
 
-    public void FireAction(string s, List<Transform> npcs) {
-        Destroy(GetComponent<NavMeshAgent>());
-        Destroy(GetComponent<SampleAgentScript>());
+    public void FireAction(string s) {
+
         switch (s) {
             case "0":
                 // Total reset
                 break;
             case "1":
-                hitCivilian.shootAtCivilian(npcs);
+                hitCivilian.shootAtCivilian();
+                GetComponent<NavMeshAgent>().enabled = false;
+                GetComponent<SampleAgentScript>().enabled = false;
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
+                GetComponent<NavMeshAgent>().enabled = false;
+                GetComponent<SampleAgentScript>().enabled = false;
                 break;
             case "3":
-                //turnToTransform.startTurning(transform, transform);
+                GetComponent<NavMeshAgent>().enabled = true;
+                GetComponent<SampleAgentScript>().enabled = true;
+                sampleAgentScript.walkToPlayer = !sampleAgentScript.walkToPlayer;
+                if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer(); else sampleAgentScript.walkToLandmark();
                 break;
             case "4":
+                GetComponent<NavMeshAgent>().enabled = true;
+                GetComponent<SampleAgentScript>().enabled = true;
                 break;
             case "5":
                 break;

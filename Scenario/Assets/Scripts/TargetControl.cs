@@ -76,10 +76,14 @@ public class TargetControl : MonoBehaviour {
     }
 
     public void AnnesFillList(List<Transform> list) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/TweakenVanTargetSchietOpburger
         this.civilianList = list;
-        Debug.Log(civilianList.Count);
+        //Debug.Log(civilianList.Count);
     }
-    
+
     public void fillCivilianList(List<Transform> list) {
         foreach (Transform child in list)
             if (child.gameObject.tag.Equals("Civilian"))
