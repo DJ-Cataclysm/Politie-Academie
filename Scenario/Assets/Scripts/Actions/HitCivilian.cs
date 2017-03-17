@@ -52,9 +52,6 @@ public class HitCivilian : MonoBehaviour {
         Vector3 forward = gunhole.transform.TransformDirection(Vector3.forward);
         RaycastHit targetHit;
 
-        //transform.GetChild(1).GetComponent<ParticleSystem>().Play();
-        //GetComponent<ParticleSystem>().Play();
-
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
