@@ -37,11 +37,8 @@ public class HitCivilian : MonoBehaviour {
 
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
         // Shoot the bullet, and if it hits, check if it is a civilian
-        if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
-            if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
+        if (Physics.Raycast(gunhole.transform.position, forward, out targetHit))
+            if (targetHit.transform.gameObject.tag.Equals("Civilian"))
                 Destroy(targetHit.transform.gameObject);
-            }
-        }
-
     }
 }

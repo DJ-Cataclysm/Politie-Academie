@@ -22,6 +22,7 @@ public class TargetControl : MonoBehaviour {
     
     private ShootCivilian shootCivilian;
     private MoveTarget moveTarget;
+    private List<Transform> civilianList = new List<Transform>();
 
     /*
     public AudioSource walkAudio;
@@ -36,8 +37,6 @@ public class TargetControl : MonoBehaviour {
     public List<AudioClip> walkAudioClips = new List<AudioClip>();
     public List<AudioClip> shootAudioClips = new List<AudioClip>();
     */
-
-    private List<Transform> civilianList = new List<Transform>();
 
     public Transform civilians;
     public Transform gunHole;
@@ -77,17 +76,14 @@ public class TargetControl : MonoBehaviour {
     }
 
     public void AnnesFillList(List<Transform> list) {
-        
         this.civilianList = list;
         Debug.Log(civilianList.Count);
     }
     
     public void fillCivilianList(List<Transform> list) {
-        foreach (Transform child in list) {
-            if (child.gameObject.tag.Equals("Civilian")) {
+        foreach (Transform child in list)
+            if (child.gameObject.tag.Equals("Civilian"))
                 shootCivilian.addCivilian(child);
-            }
-        }
     }
 
     // Update is called once per frame

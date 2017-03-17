@@ -31,9 +31,7 @@ public class TurnToTransform : MonoBehaviour {
 
             Vector3 targetToCivilian = (target.transform.position - transform.position).normalized;
             float dot = Vector3.Dot(targetToCivilian, transform.forward);
-            if (dot < 0.001 && dot > -0.001) {
-                turning = false;
-            }
+            if (dot < 0.001 && dot > -0.001) turning = false;
         }
     }
 

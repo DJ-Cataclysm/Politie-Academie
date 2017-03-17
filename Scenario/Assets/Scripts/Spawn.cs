@@ -81,17 +81,13 @@ public class Spawn : MonoBehaviour {
 
         for (int i = (int)amountEnemySpawned; i < npcs.Count; i++) npcsToTransfer.Add(npcs[i - 1]);
 
-        for (int i = 0; i < amountEnemySpawned; i++) {
-            npcs[i].GetComponent<TargetControl>().AnnesFillList(npcsToTransfer);
-        }
+        for (int i = 0; i < amountEnemySpawned; i++) npcs[i].GetComponent<TargetControl>().AnnesFillList(npcsToTransfer);
 
         print("npcs.count: " + npcs.Count);
         currentTarget = npcs[0];
         for (int i = (int)amountEnemySpawned+1; i < amountToSpawn; i++)
-        {
             if (i % 8 == 0)
                 npcs[i].GetComponent<AudioSource>().enabled = true;
-        }
     }
 
     private void Update() {
@@ -105,14 +101,12 @@ public class Spawn : MonoBehaviour {
             currentTarget.GetChild(0).transform.gameObject.SetActive(false);
             currentTargetIndex++;
             // A simple "if" to prevent the currentTargetIndex from going out of bounds
-            if (currentTargetIndex > (amountEnemySpawned - 1))
-                currentTargetIndex = 0;
+            if (currentTargetIndex > (amountEnemySpawned - 1)) currentTargetIndex = 0;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             currentTarget.GetChild(0).transform.gameObject.SetActive(false);
             currentTargetIndex--;
-            if (currentTargetIndex < 0)
-                currentTargetIndex = (int)(amountEnemySpawned - 1);
+            if (currentTargetIndex < 0) currentTargetIndex = (int)(amountEnemySpawned - 1);
         }
 
         // Set the currentTarget, and turn its camera on.
