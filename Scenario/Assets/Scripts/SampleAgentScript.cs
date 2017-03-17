@@ -37,7 +37,6 @@ public class SampleAgentScript : MonoBehaviour {
         if (!isIdle) {
             agent.SetDestination(target.transform.position);
             if (agent.remainingDistance < 2 && !walkToPlayer) {
-                //Debug.Log("New landmark destination");
                 walkToLandmark();
             }
         }
@@ -47,7 +46,6 @@ public class SampleAgentScript : MonoBehaviour {
         if (!isIdle) {
             target = player.gameObject;
             agent.SetDestination(target.transform.position);
-            Debug.Log("new destination: " + agent.destination);
         }
     }
 

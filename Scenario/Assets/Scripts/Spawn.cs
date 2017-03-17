@@ -120,8 +120,8 @@ public class Spawn : MonoBehaviour {
         }
 
         // Set the currentTarget, and turn its camera on.
-        //currentTarget = npcs[currentTargetIndex];
-        //currentTarget.GetChild(0).transform.gameObject.SetActive(true);
+        currentTarget = npcs[currentTargetIndex];
+        currentTarget.GetChild(0).transform.gameObject.SetActive(true);
     }
 
     public static List<Transform> getFriendlyNpcList() {
