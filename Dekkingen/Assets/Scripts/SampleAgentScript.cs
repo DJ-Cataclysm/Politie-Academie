@@ -7,6 +7,7 @@ public class SampleAgentScript : MonoBehaviour {
     private int landmarkAmountTemp;
 
     private bool isInPanic = false;
+    private int action;
 
     List<Material> mats = new List<Material>();
 
@@ -15,6 +16,8 @@ public class SampleAgentScript : MonoBehaviour {
     NavMeshAgent agent;
     public int landmarkAmount;
     public int covermarkAmount;
+    public int offmarkCovermarkAmount;
+    public int housemarkCoverAmount;
     public bool isIdle = false;
 
     public Transform player;
@@ -24,7 +27,7 @@ public class SampleAgentScript : MonoBehaviour {
     //public Material mat2;
     //public Material mat3;
     //public Material mat4;
-    
+
 
     void Start() {
         if (this.gameObject.tag != "Target") {
@@ -44,6 +47,20 @@ public class SampleAgentScript : MonoBehaviour {
                 WalkToLandmark();
             }
         }
+        if (isInPanic) {
+            switch (action) {
+                case 1:
+                    break;
+                case 2:
+                    if (agent.remainingDistance < 2) Destroy(gameObject);
+                    break;
+                case 3:
+                    if (agent.remainingDistance < 2) Destroy(gameObject);
+                    break;
+                case 4:
+                    break;
+            }
+        }
     }
 
     public void WalkToPlayer() {
@@ -59,10 +76,30 @@ public class SampleAgentScript : MonoBehaviour {
     }
 
     public void Panic() {
+        if (isInPanic) return;
         Debug.Log("PANIC!!!");
         isInPanic = true;
 
-        target = GameObject.Find("Covermark" + Random.Range(1, (covermarkAmount + 1)));
-        agent.SetDestination(target.transform.position);
+
+
+        action = Random.Range(1, 4);
+        Debug.Log(action);
+
+        switch (action) {
+            case 1:
+                target = GameObject.Find("Covermark" + Random.Range(1, (covermarkAmount + 1)));
+                agent.SetDestination(target.transform.position);
+                break;
+            case 2:
+                target = GameObject.Find("OffmapCover" + Random.Range(1, (offmarkCovermarkAmount + 1)));
+                agent.SetDestination(target.transform.position);
+                break;
+            case 3:
+                target = GameObject.Find("HouseCover" + Random.Range(1, (housemarkCoverAmount + 1)));
+                agent.SetDestination(target.transform.position);
+                break;
+            case 4:
+                break;
+        }
     }
 }

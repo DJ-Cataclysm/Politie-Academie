@@ -11,6 +11,8 @@ public class Spawn : MonoBehaviour {
 
     private int landmarkAmount = 0;
     private int covermarkAmount = 0;
+    private int offmapCovermarkAmount = 0;
+    private int houseCovermarkAmount = 0;
 
     // Variables relating to the different types of NPCs, these will be used to spawn them.
     private List<Transform> npcs = new List<Transform>();
@@ -25,11 +27,13 @@ public class Spawn : MonoBehaviour {
     public float amountIdleSpawned = 0;
 
     public List<AudioClip> clips = new List<AudioClip>();
-   
+
 
     void Start() {
         foreach (Transform child in GameObject.Find("Landmarks").transform) landmarkAmount++;
-        foreach (Transform child in GameObject.Find("Covers").transform) covermarkAmount++;
+        foreach (Transform child in GameObject.Find("InmapCovers").transform) covermarkAmount++;
+        foreach (Transform child in GameObject.Find("OffmapCovers").transform) offmapCovermarkAmount++;
+        foreach (Transform child in GameObject.Find("HouseCovers").transform) houseCovermarkAmount++;
 
         Debug.Log(covermarkAmount);
 
@@ -74,6 +78,8 @@ public class Spawn : MonoBehaviour {
 
                 npcs[i].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
                 npcs[i].GetComponent<SampleAgentScript>().covermarkAmount = covermarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().offmarkCovermarkAmount = offmapCovermarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().housemarkCoverAmount = houseCovermarkAmount;
                 // After the idle NPCs, spawn the normal NPCs in the same way.
             } else if (i >= (amountEnemySpawned + amountIdleSpawned) && i < amountToSpawn) {
                 if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
@@ -93,6 +99,8 @@ public class Spawn : MonoBehaviour {
 
                 npcs[i].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
                 npcs[i].GetComponent<SampleAgentScript>().covermarkAmount = covermarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().offmarkCovermarkAmount = offmapCovermarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().housemarkCoverAmount = houseCovermarkAmount;
             }
         }
 
@@ -102,7 +110,7 @@ public class Spawn : MonoBehaviour {
 
         print("npcs.count: " + npcs.Count);
         currentTarget = npcs[0];
-        for (int i = (int)amountEnemySpawned+1; i < amountToSpawn; i++)
+        for (int i = (int)amountEnemySpawned + 1; i < amountToSpawn; i++)
             if (i % 8 == 0) {
                 npcs[i].GetComponent<AudioSource>().enabled = true;
                 //npcs[i].GetComponent<AudioSource>().PlayOneShot();
