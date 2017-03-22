@@ -26,22 +26,22 @@ public class TriggerAction : MonoBehaviour {
             case "1":
                 hitCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
-                GetComponent<SampleAgentScript>().enabled = false;
+                GetComponent<HostileNPC>().enabled = false;
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
-                GetComponent<SampleAgentScript>().enabled = false;
+                GetComponent<HostileNPC>().enabled = false;
                 break;
             case "3":
                 GetComponent<NavMeshAgent>().enabled = true;
-                GetComponent<SampleAgentScript>().enabled = true;
-                sampleAgentScript.walkToPlayer = !sampleAgentScript.walkToPlayer;
-                if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer(); else sampleAgentScript.walkToLandmark();
+                GetComponent<HostileNPC>().enabled = true;
+                //sampleAgentScript.walkToPlayer = !sampleAgentScript.walkToPlayer;
+                //if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer(); else sampleAgentScript.walkToLandmark();
                 break;
             case "4":
                 GetComponent<NavMeshAgent>().enabled = true;
-                GetComponent<SampleAgentScript>().enabled = true;
+                GetComponent<HostileNPC>().enabled = true;
                 break;
             case "5":
                 break;
