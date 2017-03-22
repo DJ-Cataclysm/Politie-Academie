@@ -10,6 +10,7 @@ public class Spawn : MonoBehaviour {
     private int currentTargetIndex = 0;
 
     private int landmarkAmount = 0;
+    private int covermarkAmount = 0;
 
     // Variables relating to the different types of NPCs, these will be used to spawn them.
     private List<Transform> npcs = new List<Transform>();
@@ -28,6 +29,9 @@ public class Spawn : MonoBehaviour {
 
     void Start() {
         foreach (Transform child in GameObject.Find("Landmarks").transform) landmarkAmount++;
+        foreach (Transform child in GameObject.Find("Covers").transform) covermarkAmount++;
+
+        Debug.Log(covermarkAmount);
 
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
         print("Amount to spawn is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
@@ -69,6 +73,7 @@ public class Spawn : MonoBehaviour {
                 Destroy(npcs[i].GetComponent<SampleAgentScript>());
 
                 npcs[i].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().covermarkAmount = covermarkAmount;
                 // After the idle NPCs, spawn the normal NPCs in the same way.
             } else if (i >= (amountEnemySpawned + amountIdleSpawned) && i < amountToSpawn) {
                 if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
@@ -87,6 +92,7 @@ public class Spawn : MonoBehaviour {
 
 
                 npcs[i].GetComponent<SampleAgentScript>().landmarkAmount = landmarkAmount;
+                npcs[i].GetComponent<SampleAgentScript>().covermarkAmount = covermarkAmount;
             }
         }
 
@@ -106,7 +112,7 @@ public class Spawn : MonoBehaviour {
     private void Update() {
         // If the keys "1", "2", "3", or "4" is pressed, that key is sent to the current target's script. Depending on the target, they (could) act differently.
         //if(Input.anyKeyDown)
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Alpha5))
             currentTarget.GetComponent<TriggerAction>().FireAction(Input.inputString);
 
         // If LeftArrow or RightArrow are pressed, shut off the current target's camera, advance to the next target, and switch on its camera.

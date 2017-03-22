@@ -28,8 +28,8 @@ public class HitCivilian : MonoBehaviour {
         }
         if (target == null) return;
 
-        Destroy(target.GetComponent<NavMeshAgent>());
-        Destroy(target.GetComponent<SampleAgentScript>());
+        //Destroy(target.GetComponent<NavMeshAgent>());
+        //Destroy(target.GetComponent<SampleAgentScript>());
 
         // Turn to target (in Update)
         isTurning = true;
@@ -54,14 +54,16 @@ public class HitCivilian : MonoBehaviour {
         RaycastHit targetHit;
 
         Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
+        Destroy(target.transform.gameObject);
+
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
-        if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
-            if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
-                Spawn.getFriendlyNpcList().Remove(targetHit.transform);
-                print(targetHit.transform.name);
-                Destroy(targetHit.transform.gameObject);
-            }
-        }
+        //if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
+        //    if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
+        //        Spawn.getFriendlyNpcList().Remove(targetHit.transform);
+        //        print(targetHit.transform.name);
+        //        Destroy(targetHit.transform.gameObject);
+        //    }
+        //}
         isTurning = false;
     }
 }

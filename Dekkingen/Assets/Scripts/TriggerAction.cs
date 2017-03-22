@@ -27,6 +27,8 @@ public class TriggerAction : MonoBehaviour {
                 hitCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<SampleAgentScript>().enabled = false;
+
+                Invoke("Panic", 1.5f);
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
@@ -37,13 +39,15 @@ public class TriggerAction : MonoBehaviour {
                 GetComponent<NavMeshAgent>().enabled = true;
                 GetComponent<SampleAgentScript>().enabled = true;
                 sampleAgentScript.walkToPlayer = !sampleAgentScript.walkToPlayer;
-                if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer(); else sampleAgentScript.walkToLandmark();
+                if (sampleAgentScript.walkToPlayer) sampleAgentScript.WalkToPlayer(); else sampleAgentScript.WalkToLandmark();
                 break;
             case "4":
                 GetComponent<NavMeshAgent>().enabled = true;
                 GetComponent<SampleAgentScript>().enabled = true;
                 break;
             case "5":
+                //sampleAgentScript.Panic();
+               
                 break;
             case "6":
                 break;
@@ -55,6 +59,15 @@ public class TriggerAction : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void Panic() {
+        foreach (Transform child in GameObject.Find("NPC Spawner").transform) {
+            if (child.gameObject.tag.Equals("Civilian")) {
+                Debug.Log("test");
+                child.GetComponent<SampleAgentScript>().Panic();
+            }
         }
     }
 }
