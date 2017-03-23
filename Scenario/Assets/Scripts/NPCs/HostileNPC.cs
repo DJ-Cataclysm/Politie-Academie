@@ -9,13 +9,16 @@ public class HostileNPC : NPC {
     NavMeshAgent agent;
     GameObject target;
 
-    // Use this for initialization
+    private void Awake() {
+        NPC.hostiles.Add(this);
+        NPC.all.Add(this);
+    }
+
     void Start () {
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
     }
 
-    // Update is called once per frame
     void Update () {
         agent.SetDestination(target.transform.position);
         if (agent.remainingDistance < 2) {
