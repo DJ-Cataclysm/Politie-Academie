@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.NPCs.Panic_Actions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,20 +10,18 @@ public class FriendlyNPC : NPC {
     NavMeshAgent agent;
     GameObject target;
 
-    bool isInPanic = false;
+    public bool isInPanic = false;
     int action;
+    Panic panicAction;
 
     private int landmarkAmount = 0;
-    private int covermarkAmount = 0;
     private int offmapCovermarkAmount = 0;
-    private int houseCovermarkAmount = 0;
+
 
     // Set the agent, and set a random first target
     void Start() {
         foreach (Transform child in GameObject.Find("Landmarks").transform) landmarkAmount++;
-        foreach (Transform child in GameObject.Find("InmapCovers").transform) covermarkAmount++;
         foreach (Transform child in GameObject.Find("OffmapCovers").transform) offmapCovermarkAmount++;
-        foreach (Transform child in GameObject.Find("HouseCovers").transform) houseCovermarkAmount++;
 
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
@@ -37,16 +36,14 @@ public class FriendlyNPC : NPC {
             if (agent.remainingDistance < 2 && !isInPanic) {
                 // When he's close enough, find and set a new destination for the poor bugger
                 target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
-                agent.SetDestination(target.transform.position); ;
+                agent.SetDestination(target.transform.position);
             }
         }
 
         if (isInPanic) {
+
             switch (action) {
                 case 1:
-                    if (agent.speed < 10) {
-                        agent.speed *= 1.01f;
-                    }
                     break;
                 case 2:
                     if (agent.remainingDistance < 2) Destroy(gameObject);
@@ -55,10 +52,6 @@ public class FriendlyNPC : NPC {
                     }
                     break;
                 case 3:
-                    if (agent.remainingDistance < 2) Destroy(gameObject);
-                    if (agent.speed < 10) {
-                        agent.speed *= 1.01f;
-                    }
                     break;
                 case 4:
                     break;
@@ -85,7 +78,8 @@ public class FriendlyNPC : NPC {
 
         switch (action) {
             case 1:
-                target = GameObject.Find("Covermark" + Random.Range(1, (covermarkAmount + 1)));
+                GetComponent<HideBehindCover>().enabled = true;
+                panicAction = GetComponent<HideBehindCover>();
                 agent.SetDestination(target.transform.position);
                 break;
             case 2:
@@ -93,12 +87,13 @@ public class FriendlyNPC : NPC {
                 agent.SetDestination(target.transform.position);
                 break;
             case 3:
-                target = GameObject.Find("HouseCover" + Random.Range(1, (houseCovermarkAmount + 1)));
-                agent.SetDestination(target.transform.position);
+                GetComponent<HideInHouse>().enabled = true;
+                panicAction = GetComponent<HideInHouse>();
+                agent.SetDestination(panicAction.target.transform.position);
                 break;
             case 4:
                 agent.enabled = false;
-                
+
                 transform.rotation = Quaternion.Euler(90, 0, 0);
                 break;
         }
