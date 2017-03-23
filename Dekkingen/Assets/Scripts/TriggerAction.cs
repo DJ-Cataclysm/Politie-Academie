@@ -16,6 +16,9 @@ public class TriggerAction : MonoBehaviour {
     /// (To be continued)
     /// </summary>
 
+    public static TriggerAction CreateTriggerAction() {
+        return new TriggerAction();
+    }
 
     public void FireAction(string s) {
 
@@ -48,7 +51,7 @@ public class TriggerAction : MonoBehaviour {
                 GetComponent<SampleAgentScript>().enabled = true;
                 break;
             case "5":
-                //sampleAgentScript.Panic();
+                Panic();
                
                 break;
             case "6":
@@ -64,7 +67,7 @@ public class TriggerAction : MonoBehaviour {
         }
     }
 
-    private void Panic() {
+    public void Panic() {
         foreach (Transform child in GameObject.Find("NPC Spawner").transform) {
             if (child.gameObject.tag.Equals("Civilian")) {
                 child.GetComponent<SampleAgentScript>().Panic();

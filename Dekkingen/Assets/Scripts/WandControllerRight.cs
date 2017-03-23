@@ -47,6 +47,7 @@ public class WandControllerRight : MonoBehaviour
 
         if (triggerButtonDown)
             if (controller3D != null) {
+                TriggerAction.CreateTriggerAction().Panic();
                 controller3D.FireGun();
                 SteamVR_Controller.Input((int)controller.index).TriggerHapticPulse(500);
             }
