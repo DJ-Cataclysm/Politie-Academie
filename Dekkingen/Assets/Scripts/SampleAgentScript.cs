@@ -77,12 +77,11 @@ public class SampleAgentScript : MonoBehaviour {
 
     public void Panic() {
         if (isInPanic) return;
-        Debug.Log("PANIC!!!");
         isInPanic = true;
 
+        GetComponent<NavMeshAgent>().speed *= 3;
 
-
-        action = Random.Range(1, 4);
+        action = Random.Range(1, 5);
         Debug.Log(action);
 
         switch (action) {
@@ -99,6 +98,8 @@ public class SampleAgentScript : MonoBehaviour {
                 agent.SetDestination(target.transform.position);
                 break;
             case 4:
+                GetComponent<NavMeshAgent>().enabled = false;
+                transform.rotation = Quaternion.Euler(90, 0, 0);
                 break;
         }
     }

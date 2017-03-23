@@ -34,6 +34,8 @@ public class TriggerAction : MonoBehaviour {
                 missCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<SampleAgentScript>().enabled = false;
+
+                Invoke("Panic", 1.5f);
                 break;
             case "3":
                 GetComponent<NavMeshAgent>().enabled = true;
@@ -65,7 +67,6 @@ public class TriggerAction : MonoBehaviour {
     private void Panic() {
         foreach (Transform child in GameObject.Find("NPC Spawner").transform) {
             if (child.gameObject.tag.Equals("Civilian")) {
-                Debug.Log("test");
                 child.GetComponent<SampleAgentScript>().Panic();
             }
         }
