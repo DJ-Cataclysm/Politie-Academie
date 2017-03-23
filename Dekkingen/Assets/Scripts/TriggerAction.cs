@@ -67,7 +67,7 @@ public class TriggerAction : MonoBehaviour {
         }
     }
 
-    public void Panic() {
+    public void Panic() { // at the Disco
         foreach (Transform child in GameObject.Find("NPC Spawner").transform) {
             if (child.gameObject.tag.Equals("Civilian")) {
                 child.GetComponent<SampleAgentScript>().Panic();

@@ -75,7 +75,7 @@ public class SampleAgentScript : MonoBehaviour {
         agent.SetDestination(target.transform.position);
     }
 
-    public void Panic() {
+    public void Panic() { // at the Disco
         if (isInPanic) return;
         isInPanic = true;
 
