@@ -50,12 +50,21 @@ public class SampleAgentScript : MonoBehaviour {
         if (isInPanic) {
             switch (action) {
                 case 1:
+                    if(agent.speed < 10) {
+                        agent.speed *= 1.01f;
+                    }
                     break;
                 case 2:
                     if (agent.remainingDistance < 2) Destroy(gameObject);
+                    if (agent.speed < 10) {
+                        agent.speed *= 1.01f;
+                    }
                     break;
                 case 3:
                     if (agent.remainingDistance < 2) Destroy(gameObject);
+                    if (agent.speed < 10) {
+                        agent.speed *= 1.01f;
+                    }
                     break;
                 case 4:
                     break;
@@ -78,8 +87,6 @@ public class SampleAgentScript : MonoBehaviour {
     public void Panic() { // at the Disco
         if (isInPanic) return;
         isInPanic = true;
-
-        GetComponent<NavMeshAgent>().speed *= 3;
 
         action = Random.Range(1, 5);
         Debug.Log(action);

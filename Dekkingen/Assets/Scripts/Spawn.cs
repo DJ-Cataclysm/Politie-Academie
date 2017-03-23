@@ -35,8 +35,6 @@ public class Spawn : MonoBehaviour {
         foreach (Transform child in GameObject.Find("OffmapCovers").transform) offmapCovermarkAmount++;
         foreach (Transform child in GameObject.Find("HouseCovers").transform) houseCovermarkAmount++;
 
-        Debug.Log(covermarkAmount);
-
         amountToSpawn = amountNormalSpawned + amountEnemySpawned + amountIdleSpawned;
         print("Amount to spawn is: " + amountToSpawn + ". Normal is: " + amountNormalSpawned + ". Idle is: " + amountIdleSpawned + ". Enemy is: " + amountEnemySpawned);
 
