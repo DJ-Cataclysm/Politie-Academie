@@ -13,8 +13,8 @@ public class HitCivilian : MonoBehaviour {
         while (target == null) {
             if (loops > 10) return;
             loops++;
-            Transform temp = Spawn.getFriendlyNpcList()[Random.Range(0, Spawn.getFriendlyNpcList().Count)];
-            if (temp == null) Debug.Log("nog niemand gevonden");
+            Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
+            if (temp == null) break;
             if (Vector3.Distance(temp.position, transform.position) > 20) continue;
 
             RaycastHit info;
@@ -29,7 +29,7 @@ public class HitCivilian : MonoBehaviour {
         if (target == null) return;
 
         Destroy(target.GetComponent<NavMeshAgent>());
-        Destroy(target.GetComponent<SampleAgentScript>());
+        Destroy(target.GetComponent<FriendlyNPC>());
 
         // Turn to target (in Update)
         isTurning = true;
@@ -57,8 +57,8 @@ public class HitCivilian : MonoBehaviour {
         // Shoot the bullet, and if it hits, check if it is a civilian or a target
         if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
             if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
-                Spawn.getFriendlyNpcList().Remove(targetHit.transform);
-                print(targetHit.transform.name);
+                //Spawn.getFriendlyNpcList().Remove(targetHit.transform);
+                //print(targetHit.transform.name);
                 Destroy(targetHit.transform.gameObject);
             }
         }
