@@ -22,4 +22,4 @@ public class WeatherScript : MonoBehaviour {
             RainEffect.SetActive(true);
         }
     }
-}
+}   
