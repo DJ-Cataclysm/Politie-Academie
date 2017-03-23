@@ -13,7 +13,6 @@ public class HitCivilian : MonoBehaviour {
         while (target == null) {
             if (loops > 10) return;
             loops++;
-            //Transform temp = Spawn.getFriendlyNpcList()[Random.Range(0, Spawn.getFriendlyNpcList().Count)];
             Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
             if (temp == null) break;
             if (Vector3.Distance(temp.position, transform.position) > 20) continue;

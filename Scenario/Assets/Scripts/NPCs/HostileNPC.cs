@@ -12,7 +12,7 @@ public class HostileNPC : NPC {
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, 6 + 1));
+        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
     }
 
     // Update is called once per frame
@@ -23,5 +23,12 @@ public class HostileNPC : NPC {
             target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
             agent.SetDestination(target.transform.position); ;
         }
+    }
+    protected override void OnDestroy() {
+        if (hostiles != null) {
+            hostiles.Remove(this);
+            all.Remove(this);
+        }
+        print("Deleted from list! " + this + "  hostiles is: " + hostiles.Count + "   all is: " + all.Count);
     }
 }

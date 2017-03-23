@@ -7,7 +7,7 @@ public class TriggerAction : MonoBehaviour {
     public HitCivilian hitCivilian;
     public MissCivilian missCivilian;
     public TurnToTransform turnToTransform;
-    public SampleAgentScript sampleAgentScript;
+    //public SampleAgentScript sampleAgentScript;
 
     /// <summary>
     /// !!!!!!!!!!!!!!! READ THIS BEFORE WORKING ON THIS SCRIPT!!!!!!!!!!!!!!!!!!!!
