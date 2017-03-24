@@ -9,15 +9,19 @@ public class Spawn : MonoBehaviour {
     [SerializeField] private Transform enemy;
 
     // Variables relating to the amount of NPCs to spawn. These can be altered from the menu. The values here are just defaults.
-    [SerializeField] private int amountNormalSpawned = 40;
-    [SerializeField] private int amountHostilesSpawned = 1;
-    [SerializeField] private int amountIdleSpawned = 0;
-
+    private int amountNormalSpawned;
+    private int amountHostilesSpawned;
+    private int amountIdleSpawned;
 
     void Start() {
+        amountNormalSpawned = NPCSettings.friendlyNPC;
+        amountHostilesSpawned = NPCSettings.enemyNPC;
+        amountIdleSpawned = NPCSettings.idleNPC;
+
         SpawnFriendlies(amountNormalSpawned);
         SpawnIdles(amountIdleSpawned);
         SpawnHostiles(amountHostilesSpawned);
+
 
         print("All: " + NPC.all.Count + "  Friendly: " + NPC.friendlies.Count + "  Hostile: " + NPC.hostiles.Count);
     }
