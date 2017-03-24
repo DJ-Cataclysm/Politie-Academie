@@ -60,6 +60,7 @@ public class HitCivilian : MonoBehaviour {
                 //Spawn.getFriendlyNpcList().Remove(targetHit.transform);
                 //print(targetHit.transform.name);
                 Destroy(targetHit.transform.gameObject);
+                //targetHit.transform.GetComponent<Animator>().SetBool( )
             }
         }
         isTurning = false;

@@ -13,6 +13,11 @@ public class HideBehindCover : MonoBehaviour, IPanic {
             return GetComponent<NavMeshAgent>();
         }
     }
+    Animator animator {
+        get {
+            return GetComponent<Animator>();
+        }
+    }
 
     public GameObject target {
         get {
@@ -30,6 +35,9 @@ public class HideBehindCover : MonoBehaviour, IPanic {
     void Update() {
         if (agent.speed < 10) {
             agent.speed *= 1.01f;
+        }
+        if (agent.speed > 5) {
+            animator.SetBool("Walking2Running", true);
         }
     }
 }

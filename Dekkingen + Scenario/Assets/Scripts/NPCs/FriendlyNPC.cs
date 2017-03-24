@@ -10,6 +10,12 @@ public class FriendlyNPC : NPC {
     NavMeshAgent agent;
     GameObject target;
 
+    Animator animator {
+        get {
+            return GetComponent<Animator>();
+        }
+    }
+
     public bool isInPanic = false;
     int action;
     IPanic panicAction;
@@ -25,6 +31,8 @@ public class FriendlyNPC : NPC {
         target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
 
         agent.SetDestination(target.transform.position);
+
+        animator.SetBool("Neutral2Walking", true);
     }
 
     // Agent will move towards his destination, until he's close

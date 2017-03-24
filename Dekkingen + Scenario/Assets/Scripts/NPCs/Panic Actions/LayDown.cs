@@ -12,6 +12,12 @@ public class LayDown : MonoBehaviour, IPanic {
             return GetComponent<NavMeshAgent>();
         }
     }
+    Animator animator {
+        get {
+            return GetComponent<Animator>();
+        }
+    }
+    //bool turn = false;
 
     public GameObject target {
         get {
@@ -20,8 +26,16 @@ public class LayDown : MonoBehaviour, IPanic {
     }
 
     private void OnEnable() {
-        transform.rotation = Quaternion.Euler(90, 0, 0);
+
+        animator.SetBool("Walking2Jump", true);
+        //animator.applyRootM-otion = false;
+        //turn = true;
         _target = gameObject;
         agent.enabled = false;
     }
+
+    //private void Update() {
+    //    if (turn) transform.rotation = Quaternion.Euler(1, 0, 0);
+    //    if (transform.rotation.x > 90) turn = false;
+    //}
 }
