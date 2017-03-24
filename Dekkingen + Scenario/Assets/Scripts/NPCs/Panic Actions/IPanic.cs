@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 namespace Assets.Scripts.NPCs.Panic_Actions {
-    public interface Panic {
+    public interface IPanic {
         GameObject target { get; }
     }
 }

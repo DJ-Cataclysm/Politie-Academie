@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.AI;
+using System;
 
-public class HideBehindCover : MonoBehaviour, IPanic {
-    private int covermarkAmount = 0;
+public class RunAway : MonoBehaviour, IPanic {
+    private int offmapCovermarkAmount = 0;
     private GameObject _target;
     private NavMeshAgent agent {
         get {
@@ -22,12 +22,13 @@ public class HideBehindCover : MonoBehaviour, IPanic {
     }
 
     private void OnEnable() {
-        foreach (Transform child in GameObject.Find("InmapCovers").transform) covermarkAmount++;
-        _target = GameObject.Find("Covermark" + UnityEngine.Random.Range(1, (covermarkAmount + 1)));
+        foreach (Transform child in GameObject.Find("OffmapCovers").transform) offmapCovermarkAmount++;
+        _target = GameObject.Find("OffmapCover" + UnityEngine.Random.Range(1, (offmapCovermarkAmount + 1)));
     }
 
     // Update is called once per frame
     void Update() {
+        if (agent.remainingDistance < 2) Destroy(gameObject);
         if (agent.speed < 10) {
             agent.speed *= 1.01f;
         }

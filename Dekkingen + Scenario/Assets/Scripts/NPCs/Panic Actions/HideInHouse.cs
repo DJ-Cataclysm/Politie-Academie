@@ -5,12 +5,21 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class HideInHouse : MonoBehaviour, Panic {
+public class HideInHouse : MonoBehaviour, IPanic {
     private int houseCovermarkAmount = 0;
     private GameObject _target;
-    private NavMeshAgent agent { get { return GetComponent<NavMeshAgent>(); } }
+    private NavMeshAgent agent {
+        get {
+            return GetComponent<NavMeshAgent>();
+        }
+    }
 
-    public GameObject target { get { return _target; } private set { } }
+    public GameObject target {
+        get {
+            return _target;
+        }
+        private set { }
+    }
 
     private void OnEnable() {
         foreach (Transform child in GameObject.Find("HouseCovers").transform) houseCovermarkAmount++;
