@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeatherScript : MonoBehaviour {
 
-    public GameObject RainEffect;
+    [SerializeField] private GameObject RainEffect;
 
 	// Use this for initialization
 	void Start () { 

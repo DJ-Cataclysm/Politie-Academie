@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 public class SliderScript : MonoBehaviour {
-    public Slider slider;
+    [SerializeField] private Slider slider;
     public static int dayNight;
     public static int weatherSwitch;
   
