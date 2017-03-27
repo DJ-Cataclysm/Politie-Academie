@@ -44,6 +44,12 @@ public class FriendlyNPC : NPC {
                 agent.SetDestination(target.transform.position);
             }
         }
+
+        //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace"));
+        if (agent.speed < 5 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
+            Debug.Log("test");
+        } 
+
     }
 
     protected override void OnDestroy() {
