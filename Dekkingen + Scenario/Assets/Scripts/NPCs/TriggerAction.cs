@@ -60,9 +60,8 @@ public class TriggerAction : MonoBehaviour {
     }
 
     public void Panic() { // at the Disco
-        foreach(FriendlyNPC child in NPC.friendlies) {
-            child.Panic();
-        }
+        foreach (FriendlyNPC child in NPC.friendlies) child.Panic();
+
         //foreach (Transform child in GameObject.Find("NPC Spawner").transform) {
         //    if (child.gameObject.tag.Equals("Civilian")) {
         //        child.GetComponent<SampleAgentScript>().Panic();

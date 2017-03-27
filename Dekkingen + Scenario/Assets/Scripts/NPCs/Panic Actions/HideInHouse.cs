@@ -15,7 +15,7 @@ public class HideInHouse : MonoBehaviour, IPanic {
     }
     Animator animator {
         get {
-            return GetComponent<Animator>();
+            return GetComponentInChildren<Animator>();
         }
     }
 

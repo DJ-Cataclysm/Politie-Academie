@@ -14,7 +14,7 @@ public class LayDown : MonoBehaviour, IPanic {
     }
     Animator animator {
         get {
-            return GetComponent<Animator>();
+            return GetComponentInChildren<Animator>();
         }
     }
     //bool turn = false;

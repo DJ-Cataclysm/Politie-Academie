@@ -12,7 +12,7 @@ public class FriendlyNPC : NPC {
 
     Animator animator {
         get {
-            return GetComponent<Animator>();
+            return GetComponentInChildren<Animator>();
         }
     }
 
@@ -57,6 +57,7 @@ public class FriendlyNPC : NPC {
 
     public void Panic() { // at the Disco
         Debug.Log("Panic!");
+        Debug.Log("test " + name);
 
         if (isInPanic) return;
         isInPanic = true;
