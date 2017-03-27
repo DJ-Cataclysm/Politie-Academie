@@ -46,9 +46,9 @@ public class FriendlyNPC : NPC {
         }
 
         //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace"));
-        if (agent.speed < 5 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
-            Debug.Log("test");
-        } 
+        //if (agent.speed < 5 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
+            //Debug.Log("test");
+        //} 
 
     }
 
