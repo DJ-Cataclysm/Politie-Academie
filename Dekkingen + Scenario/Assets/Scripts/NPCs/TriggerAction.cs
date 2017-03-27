@@ -15,7 +15,9 @@ public class TriggerAction : MonoBehaviour {
     /// This script and its one function (FireAction) are used to trigger specific actions for the currently selected target.
     /// (To be continued)
     /// </summary>
-
+    public static TriggerAction CreateTriggerAction() {
+        return new TriggerAction();
+    }
 
     public void FireAction(string s) {
 
@@ -27,11 +29,13 @@ public class TriggerAction : MonoBehaviour {
                 hitCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<HostileNPC>().enabled = false;
+                Invoke("Panic", 1.5f);
                 break;
             case "2":
                 missCivilian.shootAtCivilian();
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<HostileNPC>().enabled = false;
+                Invoke("Panic", 1.5f);
                 break;
             case "3":
                 GetComponent<NavMeshAgent>().enabled = true;

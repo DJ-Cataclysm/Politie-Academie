@@ -37,7 +37,6 @@ public class FriendlyNPC : NPC {
 
     // Agent will move towards his destination, until he's close
     void Update() {
-
         if (agent.enabled) {
             if (agent.remainingDistance < 2 && !isInPanic) {
                 // When he's close enough, find and set a new destination for the poor bugger
@@ -57,9 +56,9 @@ public class FriendlyNPC : NPC {
 
     public void Panic() { // at the Disco
         Debug.Log("Panic!");
-        Debug.Log("test " + name);
 
         if (isInPanic) return;
+
         isInPanic = true;
 
         action = Random.Range(1, 5);
