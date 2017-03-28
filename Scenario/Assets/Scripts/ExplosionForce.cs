@@ -37,7 +37,7 @@ public class ExplosionForce : MonoBehaviour {
                     
 
                 if (rb != null)
-                    rb.AddExplosionForce(power, explosionPos, radius, 0.0F);
+                    rb.AddExplosionForce(power, explosionPos, radius, -2.0F);
             }
         }
         
