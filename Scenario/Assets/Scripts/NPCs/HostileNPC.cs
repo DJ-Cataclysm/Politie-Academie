@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 public class HostileNPC : NPC {
 
-    //[SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
     Landmark target;
 
     private void Awake() {
-        NPC.hostiles.Add(this);
-        NPC.all.Add(this);
+        //NPC.hostiles.Add(this);
+        //NPC.all.Add(this);
     }
 
     void Start () {
