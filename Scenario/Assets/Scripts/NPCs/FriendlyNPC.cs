@@ -13,7 +13,7 @@ public class FriendlyNPC : NPC {
     // Set the agent, and set a random first target
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count - 1))];
+        target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
         agent.SetDestination(target.transform.position);
     }
 
@@ -21,7 +21,7 @@ public class FriendlyNPC : NPC {
     void Update () {        
         if (agent.remainingDistance < 2) {
             // When he's close enough, find and set a new destination for the poor bugger
-            target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count-1))];
+            target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
             agent.SetDestination(target.transform.position); ;
         }
     }
