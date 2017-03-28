@@ -5,23 +5,23 @@ using UnityEngine.AI;
 
 public class FriendlyNPC : NPC {
 
-    [SerializeField] private int landmarkAmount;
+    //[SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
-    GameObject target;
+    Landmark target;
 
 
     // Set the agent, and set a random first target
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
-    }
-	
-	// Agent will move towards his destination, until he's close
-	void Update () {
+        target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count - 1))];
         agent.SetDestination(target.transform.position);
+    }
+
+    // Agent will move towards his destination, until he's close
+    void Update () {        
         if (agent.remainingDistance < 2) {
             // When he's close enough, find and set a new destination for the poor bugger
-            target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+            target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count-1))];
             agent.SetDestination(target.transform.position); ;
         }
     }

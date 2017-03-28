@@ -27,24 +27,30 @@ public class Spawn : MonoBehaviour {
         } else {
             GameObject.FindObjectOfType<Inputhandler>().SpawnEvent.AddListener(SpawnHostiles);
         }
+
+        //print(Mark.spawnmarks[0].transform.position + "  " + Mark.spawnmarks[1].transform.position + "  " + Mark.spawnmarks[2].transform.position + "  " + Mark.spawnmarks[3].transform.position);
+
     }
 
     // This function decides where and how the standard Friendly NPCs spawn (Type: FriendlyNPC.cs)
     private void SpawnFriendlies() {
         for (int i = 0; i < amountFriendliesSpawned; i++) {
-            string spawnpoint = "Spawnpoint" + Random.Range(1, 5);
-            if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
+            int random = Random.Range(0, Mark.spawnmarks.Count);
+            Spawnmark spawnmark = Mark.spawnmarks[random];
+            //if (random % 2 == 0)
+            if (random == 0 || random == 3)
                 Instantiate(npc,
                     new Vector3(
-                    Random.Range(GameObject.Find("Spawnpoint4").transform.position.x, GameObject.Find("Spawnpoint2").transform.position.x),
+                    Random.Range(Mark.spawnmarks[2].transform.position.x, Mark.spawnmarks[1].transform.position.x),
                     1,
-                    GameObject.Find(spawnpoint).transform.position.z),
+                    spawnmark.gameObject.transform.position.z),
                     Quaternion.identity, transform);
-            else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
+            //else if (random % 2 == 1)
+            else if (random == 1 || random == 2)
                 Instantiate(npc, new Vector3(
-                    GameObject.Find(spawnpoint).transform.position.x,
+                    spawnmark.gameObject.transform.position.x,
                     1,
-                    Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
+                    Random.Range(Mark.spawnmarks[3].transform.position.z, Mark.spawnmarks[0].transform.position.z)),
                     Quaternion.identity, transform);
         }
     }
@@ -57,28 +63,31 @@ public class Spawn : MonoBehaviour {
     private void SpawnHostiles() {
         if (randomSpawn) {
             for (int i = 0; i < amountHostilesSpawned; i++) {
-                string spawnpoint = "Spawnpoint" + Random.Range(1, 5);
-                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
+                int random = Random.Range(0, Mark.spawnmarks.Count);
+                Spawnmark spawnmark = Mark.spawnmarks[random];
+                //if (random % 2 == 0)
+                if (random == 0 || random == 3)
                     Instantiate(enemy,
                         new Vector3(
-                        Random.Range(GameObject.Find("Spawnpoint4").transform.position.x, GameObject.Find("Spawnpoint2").transform.position.x),
+                        Random.Range(Mark.spawnmarks[2].transform.position.x, Mark.spawnmarks[1].transform.position.x),
                         1,
-                        GameObject.Find(spawnpoint).transform.position.z),
+                        spawnmark.gameObject.transform.position.z),
                         Quaternion.identity, transform);
-                else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
+                //else if (random % 2 == 1)
+                else if (random == 1 || random == 2)
                     Instantiate(enemy, new Vector3(
-                        GameObject.Find(spawnpoint).transform.position.x,
+                        spawnmark.gameObject.transform.position.x,
                         1,
-                        Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
+                        Random.Range(Mark.spawnmarks[3].transform.position.z, Mark.spawnmarks[0].transform.position.z)),
                         Quaternion.identity, transform);
             }
         } else {
             for (float i = 0; i < amountHostilesSpawned; i++) {
-                string spawnpoint = "ESpawnpoint" + enemySpawn;
+                EnemySpawnmark eSpawnmark = Mark.eSpawnmarks[enemySpawn];
                 Instantiate(enemy, new Vector3(
-                    GameObject.Find(spawnpoint).transform.position.x,
+                    eSpawnmark.transform.position.x,
                     1,
-                    GameObject.Find(spawnpoint).transform.position.z),
+                    eSpawnmark.transform.position.z),
                     Quaternion.identity, transform);
             }
         }

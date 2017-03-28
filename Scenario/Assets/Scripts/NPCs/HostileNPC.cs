@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class HostileNPC : NPC {
 
-    [SerializeField] private int landmarkAmount;
+    //[SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
-    GameObject target;
+    Landmark target;
 
     private void Awake() {
         NPC.hostiles.Add(this);
@@ -16,14 +16,14 @@ public class HostileNPC : NPC {
 
     void Start () {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
+        target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count - 1))];
+        agent.SetDestination(target.transform.position);
     }
 
-    void Update () {
-        agent.SetDestination(target.transform.position);
+    void Update () {      
         if (agent.remainingDistance < 2) {
             // When he's close enough, find and set a new destination for the poor bugger
-            target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+            target = Mark.landmarks[Random.Range(1, (Mark.landmarks.Count - 1))];
             agent.SetDestination(target.transform.position); ;
         }
     }
