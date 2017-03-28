@@ -9,7 +9,7 @@ public class Inputhandler : MonoBehaviour {
     private Transform currentTarget;
     private int currentTargetIndex = 0;
 
-    public UnityEvent TestEvent;
+    public UnityEvent SpawnEvent;
 
     private bool hostilesInScene;
 	
@@ -17,7 +17,7 @@ public class Inputhandler : MonoBehaviour {
         if(hostilesInScene == false) {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 hostilesInScene = true;
-                TestEvent.Invoke();
+                SpawnEvent.Invoke();
             }
         } else { 
             if (currentTarget == null) currentTarget = NPC.hostiles[0].transform;

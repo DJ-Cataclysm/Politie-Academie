@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Spawn : MonoBehaviour {
     // Variables relating to the different types of NPCs, these will be used to spawn them.
@@ -13,20 +12,26 @@ public class Spawn : MonoBehaviour {
     [SerializeField] private int amountHostilesSpawned = 1;
     [SerializeField] private int amountIdleSpawned = 0;
 
+
+    // Temporary variables
+    public int enemySpawn;
+    [SerializeField] private bool randomSpawn;
+
     // Start() simply calls the three functions which spawn the NPCs. 
     void Start() {
         SpawnFriendlies();
         SpawnIdles();
 
-        GameObject.FindObjectOfType<Inputhandler>().TestEvent.AddListener(SpawnHostiles);
-        //SpawnHostiles(amountHostilesSpawned);
-
-        print("All: " + NPC.all.Count + "  Friendly: " + NPC.friendlies.Count + "  Hostile: " + NPC.hostiles.Count);
+        if (randomSpawn) {
+            SpawnHostiles();
+        } else {
+            GameObject.FindObjectOfType<Inputhandler>().SpawnEvent.AddListener(SpawnHostiles);
+        }
     }
 
     // This function decides where and how the standard Friendly NPCs spawn (Type: FriendlyNPC.cs)
     private void SpawnFriendlies() {
-        for (float i = 0; i < amountFriendliesSpawned; i++) {
+        for (int i = 0; i < amountFriendliesSpawned; i++) {
             string spawnpoint = "Spawnpoint" + Random.Range(1, 5);
             if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
                 Instantiate(npc,
@@ -50,13 +55,32 @@ public class Spawn : MonoBehaviour {
 
     // This function decides where and how the Hostile NPCs spawn. (Type: HostileNPC.cs)
     private void SpawnHostiles() {
-        for (float i = 0; i < amountHostilesSpawned; i++) {
-            string spawnpoint = "ESpawnpoint1";
-            Instantiate(enemy, new Vector3(
-                GameObject.Find(spawnpoint).transform.position.x,
-                1,
-                GameObject.Find(spawnpoint).transform.position.z),
-                Quaternion.identity, transform);
+        if (randomSpawn) {
+            for (int i = 0; i < amountHostilesSpawned; i++) {
+                string spawnpoint = "Spawnpoint" + Random.Range(1, 5);
+                if (spawnpoint == "Spawnpoint1" || spawnpoint == "Spawnpoint3")
+                    Instantiate(enemy,
+                        new Vector3(
+                        Random.Range(GameObject.Find("Spawnpoint4").transform.position.x, GameObject.Find("Spawnpoint2").transform.position.x),
+                        1,
+                        GameObject.Find(spawnpoint).transform.position.z),
+                        Quaternion.identity, transform);
+                else if (spawnpoint == "Spawnpoint2" || spawnpoint == "Spawnpoint4")
+                    Instantiate(enemy, new Vector3(
+                        GameObject.Find(spawnpoint).transform.position.x,
+                        1,
+                        Random.Range(GameObject.Find("Spawnpoint1").transform.position.z, GameObject.Find("Spawnpoint3").transform.position.z)),
+                        Quaternion.identity, transform);
+            }
+        } else {
+            for (float i = 0; i < amountHostilesSpawned; i++) {
+                string spawnpoint = "ESpawnpoint" + enemySpawn;
+                Instantiate(enemy, new Vector3(
+                    GameObject.Find(spawnpoint).transform.position.x,
+                    1,
+                    GameObject.Find(spawnpoint).transform.position.z),
+                    Quaternion.identity, transform);
+            }
         }
     }
 }
