@@ -53,10 +53,13 @@ public class Spawn : MonoBehaviour {
         //            Random.Range(Mark.spawnmarks[3].transform.position.z, Mark.spawnmarks[0].transform.position.z)),
         //            Quaternion.identity, transform);
         //}
+
+        // For each FriendlyNPC to spawn, decide a random direction (normalized vector) and multiply that by a random amount to determine distance.
+        // Finally, offset it around the player so the NPCs don't spawn in the player's face.
         for (int i = 0; i < amountFriendliesSpawned; i++) {
             Vector3 randomDir = new Vector3(RNG.NextFloat(-1, 1), 0, RNG.NextFloat(-1, 1)).normalized;
                 Instantiate(npc,
-                    (randomDir * RNG.NextFloat(-25, 30)) + Vector3.up,
+                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("[CameraRig]").transform.position,
                     Quaternion.identity, transform);
         }
     }
@@ -91,7 +94,7 @@ public class Spawn : MonoBehaviour {
             for (int i = 0; i < amountHostilesSpawned; i++) {
                 Vector3 randomDir = new Vector3(RNG.NextFloat(-1, 1), 0, RNG.NextFloat(-1, 1)).normalized;
                 Instantiate(enemy,
-                    (randomDir * RNG.NextFloat(-25, 30)) + Vector3.up,
+                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("[CameraRig]").transform.position,
                     Quaternion.identity, transform);
             }
         } else {
