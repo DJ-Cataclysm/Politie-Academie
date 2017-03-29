@@ -9,7 +9,7 @@ public class HostileNPC : NPC {
     Landmark target;
 
     private void Awake() {
-        //NPC.hostiles.Add(this);
+        NPC.hostiles.Add(this);
         //NPC.all.Add(this);
     }
 

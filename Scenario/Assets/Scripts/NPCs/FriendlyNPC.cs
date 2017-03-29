@@ -31,6 +31,6 @@ public class FriendlyNPC : NPC {
             friendlies.Remove(this);
             all.Remove(this);
         }
-        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count);
+        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count + "   enemies is: " + NPC.hostiles.Count);
     }
 }

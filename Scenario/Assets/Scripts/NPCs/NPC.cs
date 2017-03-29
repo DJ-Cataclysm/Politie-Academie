@@ -28,7 +28,7 @@ public abstract class NPC : MonoBehaviour {
     public static List<HostileNPC> hostiles {
         get {
             if(_hostiles == null) {
-                _hostiles = new List<HostileNPC>(FindObjectsOfType<HostileNPC>());
+                _hostiles = new List<HostileNPC>();
             }
             return _hostiles;
         }
