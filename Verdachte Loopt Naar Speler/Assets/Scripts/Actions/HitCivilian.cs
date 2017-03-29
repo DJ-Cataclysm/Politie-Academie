@@ -11,7 +11,10 @@ public class HitCivilian : MonoBehaviour {
 
         int loops = 0;
         while (target == null) {
-            if (loops > 10) return;
+            if (loops > 10) {
+                GetComponent<TriggerAction>().stopShooting();
+                return;
+            }
             loops++;
             Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
             if (temp == null) break;
@@ -26,7 +29,10 @@ public class HitCivilian : MonoBehaviour {
             
             target = temp;
         }
-        if (target == null) return;
+        if (target == null) {
+            GetComponent<TriggerAction>().stopShooting();
+            return;
+        }
 
         //Destroy(target.GetComponent<NavMeshAgent>());
         //Destroy(target.GetComponent<FriendlyNPC>());
@@ -49,6 +55,9 @@ public class HitCivilian : MonoBehaviour {
 
     private void ShootGun() {
         GetComponent<AudioSource>().Play();
+
+        GetComponent<TriggerAction>().stopShooting();
+
         //Transform gunhole = this.transform.GetChild(1);
         //Vector3 forward = gunhole.transform.TransformDirection(Vector3.forward);
         //RaycastHit targetHit;

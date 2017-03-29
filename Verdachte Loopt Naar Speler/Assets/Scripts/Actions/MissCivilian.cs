@@ -47,6 +47,7 @@ public class MissCivilian : MonoBehaviour {
     }
 
     private void stopTurning() {
+        GetComponent<TriggerAction>().stopShooting();
         GetComponent<AudioSource>().Play();
         isTurning = false;
     }

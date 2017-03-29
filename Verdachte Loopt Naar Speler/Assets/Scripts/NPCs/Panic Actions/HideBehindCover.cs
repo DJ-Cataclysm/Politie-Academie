@@ -36,7 +36,7 @@ public class HideBehindCover : MonoBehaviour, IPanic {
         if (agent.speed < 10) {
             agent.speed *= 1.01f;
         }
-        if (agent.speed > 5) {
+        if (agent.speed > 4) {
             animator.SetBool("Walking2Running", true);
         }
     }
