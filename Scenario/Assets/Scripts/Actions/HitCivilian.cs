@@ -11,7 +11,10 @@ public class HitCivilian : MonoBehaviour {
 
         int loops = 0;
         while (target == null) {
-            if (loops > 10) return;
+            if (loops > 10) {
+                GetComponent<TriggerAction>().stopShooting();
+                return;
+            }
             loops++;
             Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
             if (temp == null) break;
@@ -19,14 +22,17 @@ public class HitCivilian : MonoBehaviour {
 
             RaycastHit info;
             if (Physics.Linecast(transform.position, temp.position, out info, LayerMask.GetMask("Neutral"))) {
-                if(!info.transform.tag.Equals("Civilian")) continue;
+                if (!info.transform.tag.Equals("Civilian")) continue;
             }
 
             if (!temp.gameObject.tag.Equals("Civilian")) continue;
-            
+
             target = temp;
         }
-        if (target == null) return;
+        if (target == null) {
+            GetComponent<TriggerAction>().stopShooting();
+            return;
+        }
 
         // Turn to target (in Update)
         isTurning = true;
@@ -46,6 +52,8 @@ public class HitCivilian : MonoBehaviour {
 
     private void ShootGun() {
         GetComponent<AudioSource>().Play();
+        GetComponent<TriggerAction>().stopShooting();
+        Debug.Log("SHOOT!");
         Destroy(target.gameObject);
         isTurning = false;
     }

@@ -11,7 +11,10 @@ public class MissCivilian : MonoBehaviour {
 
         int loops = 0;
         while (target == null) {
-            if (loops > 10) return;
+            if (loops > 10) {
+                GetComponent<TriggerAction>().stopShooting();
+                return;
+            }
             loops++;
             Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
             if (temp == null) break;
@@ -26,7 +29,10 @@ public class MissCivilian : MonoBehaviour {
 
             target = temp;
         }
-        if (target == null) return;
+        if (target == null) {
+            GetComponent<TriggerAction>().stopShooting();
+            return;
+        }
 
         Destroy(target.GetComponent<NavMeshAgent>());
         Destroy(target.GetComponent<FriendlyNPC>());
@@ -48,6 +54,7 @@ public class MissCivilian : MonoBehaviour {
 
     private void stopTurning() {
         GetComponent<AudioSource>().Play();
+        GetComponent<TriggerAction>().stopShooting();
         isTurning = false;
     }
 }

@@ -35,20 +35,20 @@ public class Inputhandler : MonoBehaviour {
 
             // If LeftArrow or RightArrow are pressed, shut off the current target's camera, advance to the next target, and switch on its camera.
             if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                currentTarget.GetChild(2).transform.gameObject.SetActive(false);
+                currentTarget.GetChild(1).transform.gameObject.SetActive(false);
                 currentTargetIndex++;
                 // A simple "if" to prevent the currentTargetIndex from going out of bounds
                 if (currentTargetIndex > (NPC.hostiles.Count - 1)) currentTargetIndex = 0;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                currentTarget.GetChild(2).transform.gameObject.SetActive(false);
+                currentTarget.GetChild(1).transform.gameObject.SetActive(false);
                 currentTargetIndex--;
                 // A simple "if" to prevent the currentTargetIndex from going out of bounds
                 if (currentTargetIndex < 0) currentTargetIndex = (NPC.hostiles.Count - 1);
             }
 
             currentTarget = NPC.hostiles[currentTargetIndex].transform;
-            currentTarget.GetChild(2).transform.gameObject.SetActive(true);
+            currentTarget.GetChild(1).transform.gameObject.SetActive(true);
         }
     }
 }

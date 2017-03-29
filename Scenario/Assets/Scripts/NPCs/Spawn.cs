@@ -35,7 +35,7 @@ public class Spawn : MonoBehaviour {
         for (int i = 0; i < amountFriendliesSpawned; i++) {
             Vector3 randomDir = new Vector3(RNG.NextFloat(-1, 1), 0, RNG.NextFloat(-1, 1)).normalized;
                 Instantiate(npc,
-                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("[CameraRig]").transform.position,
+                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("Player").transform.position,
                     Quaternion.identity, transform);
         }
     }
@@ -51,7 +51,7 @@ public class Spawn : MonoBehaviour {
             for (int i = 0; i < amountHostilesSpawned; i++) {
                 Vector3 randomDir = new Vector3(RNG.NextFloat(-1, 1), 0, RNG.NextFloat(-1, 1)).normalized;
                 Instantiate(enemy,
-                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("[CameraRig]").transform.position,
+                    (randomDir * RNG.NextFloat(10, 30)) + Vector3.up + GameObject.Find("Player").transform.position,
                     Quaternion.identity, transform);
             }
         } else {
