@@ -20,7 +20,6 @@ public class TriggerAction : MonoBehaviour {
     }
 
     public void FireAction(string s) {
-
         switch (s) {
             case "0":
                 // Total reset

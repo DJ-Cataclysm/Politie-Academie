@@ -14,12 +14,15 @@ public class Inputhandler : MonoBehaviour {
     private bool hostilesInScene;
 
     private void Start() {
-        if (NPC.hostiles.Count != 0)
-            this.hostilesInScene = true;
+        //print(NPC.hostiles.Count);
+        //if (NPC.hostiles.Count != 0)
+        //    this.hostilesInScene = true;
     }
 
     void Update () {
-        if(hostilesInScene == false) {
+        if (NPC.hostiles.Count != 0)
+            this.hostilesInScene = true;
+        if (hostilesInScene == false) {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 hostilesInScene = true;
                 SpawnEvent.Invoke();

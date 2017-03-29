@@ -26,33 +26,10 @@ public class Spawn : MonoBehaviour {
         } else {
             GameObject.FindObjectOfType<Inputhandler>().SpawnEvent.AddListener(SpawnHostiles);
         }
-
-        //print(Mark.spawnmarks[0].transform.position + "  " + Mark.spawnmarks[1].transform.position + "  " + Mark.spawnmarks[2].transform.position + "  " + Mark.spawnmarks[3].transform.position);
-
     }
 
     // This function decides where and how the standard Friendly NPCs spawn (Type: FriendlyNPC.cs)
     private void SpawnFriendlies() {
-        //for (int i = 0; i < amountFriendliesSpawned; i++) {
-        //    int random = Random.Range(0, Mark.spawnmarks.Count);
-        //    Spawnmark spawnmark = Mark.spawnmarks[random];
-        //    //if (random % 2 == 0)
-        //    if (random == 0 || random == 3)
-        //        Instantiate(npc,
-        //            new Vector3(
-        //            Random.Range(Mark.spawnmarks[2].transform.position.x, Mark.spawnmarks[1].transform.position.x),
-        //            1,
-        //            spawnmark.gameObject.transform.position.z),
-        //            Quaternion.identity, transform);
-        //    //else if (random % 2 == 1)
-        //    else if (random == 1 || random == 2)
-        //        Instantiate(npc, new Vector3(
-        //            spawnmark.gameObject.transform.position.x,
-        //            1,
-        //            Random.Range(Mark.spawnmarks[3].transform.position.z, Mark.spawnmarks[0].transform.position.z)),
-        //            Quaternion.identity, transform);
-        //}
-
         // For each FriendlyNPC to spawn, decide a random direction (normalized vector) and multiply that by a random amount to determine distance.
         // Finally, offset it around the player so the NPCs don't spawn in the player's face.
         for (int i = 0; i < amountFriendliesSpawned; i++) {
@@ -71,25 +48,6 @@ public class Spawn : MonoBehaviour {
     // This function decides where and how the Hostile NPCs spawn. (Type: HostileNPC.cs)
     private void SpawnHostiles() {
         if (randomSpawn) {
-            //for (int i = 0; i < amountHostilesSpawned; i++) {
-            //    int random = Random.Range(0, Mark.spawnmarks.Count);
-            //    Spawnmark spawnmark = Mark.spawnmarks[random];
-            //    //if (random % 2 == 0)
-            //    if (random == 0 || random == 3)
-            //        Instantiate(enemy,
-            //            new Vector3(
-            //            Random.Range(Mark.spawnmarks[2].transform.position.x, Mark.spawnmarks[1].transform.position.x),
-            //            1,
-            //            spawnmark.gameObject.transform.position.z),
-            //            Quaternion.identity, transform);
-            //    //else if (random % 2 == 1)
-            //    else if (random == 1 || random == 2)
-            //        Instantiate(enemy, new Vector3(
-            //            spawnmark.gameObject.transform.position.x,
-            //            1,
-            //            Random.Range(Mark.spawnmarks[3].transform.position.z, Mark.spawnmarks[0].transform.position.z)),
-            //            Quaternion.identity, transform);
-
             for (int i = 0; i < amountHostilesSpawned; i++) {
                 Vector3 randomDir = new Vector3(RNG.NextFloat(-1, 1), 0, RNG.NextFloat(-1, 1)).normalized;
                 Instantiate(enemy,

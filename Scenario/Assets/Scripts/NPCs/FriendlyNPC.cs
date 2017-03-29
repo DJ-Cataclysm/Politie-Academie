@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class FriendlyNPC : NPC {
 
-    //[SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
     Landmark target;
 
@@ -25,10 +24,8 @@ public class FriendlyNPC : NPC {
 
     // Set the agent, and set a random first target
     void Start() {
-        foreach (Transform child in GameObject.Find("Landmarks").transform) landmarkAmount++;
-
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
+        target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
 
         agent.SetDestination(target.transform.position);
 
@@ -43,23 +40,7 @@ public class FriendlyNPC : NPC {
                 target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
                 agent.SetDestination(target.transform.position);
             }
-        target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
-        agent.SetDestination(target.transform.position);
-    }
-
-        //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace"));
-        //if (agent.speed < 5 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
-            //Debug.Log("test");
-        //} 
-
-    }
-
-    protected override void OnDestroy() {
-        if (friendlies != null) {
-            friendlies.Remove(this);
-            all.Remove(this);
         }
-        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count + "   enemies is: " + NPC.hostiles.Count);
     }
 
     public void Panic() { // at the Disco
@@ -93,5 +74,13 @@ public class FriendlyNPC : NPC {
                 panicAction = GetComponent<LayDown>();
                 break;
         }
+    }
+
+    protected override void OnDestroy() {
+        if (friendlies != null) {
+            friendlies.Remove(this);
+            all.Remove(this);
+        }
+        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count + "   enemies is: " + NPC.hostiles.Count);
     }
 }
