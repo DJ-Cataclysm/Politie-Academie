@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 298d2678cd6f73d44a600aa950754297
+timeCreated: 1490691768
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bankjes01
+    100002: Bankjes02
+    100004: Bankjes03
+    100006: Bankjes04
+    100008: Bankjes05
+    100010: gebouw
+    100012: gebouw6
+    100014: gebouwen004
+    100016: gebouwen005
+    100018: gebouwen006
+    100020: gebouwen01
+    100022: gebouwen02
+    100024: gebouwen03
+    100026: grasgrond
+    100028: mens
+    100030: omheining
+    100032: plantenbakken
+    100034: plantenbakken 1
+    100036: plantenbakken 2
+    100038: plantenbakken 3
+    100040: plantenbakken 4
+    100042: plantenbakken 5
+    100044: Plein
+    100046: //RootNode
+    100048: stadhuis
+    100050: stambeeld
+    100052: stambeeld 1
+    100054: verhoging004
+    100056: verhoging005
+    100058: verhoging006
+    100060: verhoging01
+    100062: verhoging02
+    100064: verhoging03
+    400000: Bankjes01
+    400002: Bankjes02
+    400004: Bankjes03
+    400006: Bankjes04
+    400008: Bankjes05
+    400010: gebouw
+    400012: gebouw6
+    400014: gebouwen004
+    400016: gebouwen005
+    400018: gebouwen006
+    400020: gebouwen01
+    400022: gebouwen02
+    400024: gebouwen03
+    400026: grasgrond
+    400028: mens
+    400030: omheining
+    400032: plantenbakken
+    400034: plantenbakken 1
+    400036: plantenbakken 2
+    400038: plantenbakken 3
+    400040: plantenbakken 4
+    400042: plantenbakken 5
+    400044: Plein
+    400046: //RootNode
+    400048: stadhuis
+    400050: stambeeld
+    400052: stambeeld 1
+    400054: verhoging004
+    400056: verhoging005
+    400058: verhoging006
+    400060: verhoging01
+    400062: verhoging02
+    400064: verhoging03
+    2300000: Bankjes01
+    2300002: Bankjes02
+    2300004: Bankjes03
+    2300006: Bankjes04
+    2300008: Bankjes05
+    2300010: gebouw
+    2300012: gebouw6
+    2300014: gebouwen004
+    2300016: gebouwen005
+    2300018: gebouwen006
+    2300020: gebouwen01
+    2300022: gebouwen02
+    2300024: gebouwen03
+    2300026: grasgrond
+    2300028: mens
+    2300030: omheining
+    2300032: plantenbakken
+    2300034: plantenbakken 1
+    2300036: plantenbakken 2
+    2300038: plantenbakken 3
+    2300040: plantenbakken 4
+    2300042: plantenbakken 5
+    2300044: Plein
+    2300046: stadhuis
+    2300048: stambeeld
+    2300050: stambeeld 1
+    2300052: verhoging004
+    2300054: verhoging005
+    2300056: verhoging006
+    2300058: verhoging01
+    2300060: verhoging02
+    2300062: verhoging03
+    3300000: Bankjes01
+    3300002: Bankjes02
+    3300004: Bankjes03
+    3300006: Bankjes04
+    3300008: Bankjes05
+    3300010: gebouw
+    3300012: gebouw6
+    3300014: gebouwen004
+    3300016: gebouwen005
+    3300018: gebouwen006
+    3300020: gebouwen01
+    3300022: gebouwen02
+    3300024: gebouwen03
+    3300026: grasgrond
+    3300028: mens
+    3300030: omheining
+    3300032: plantenbakken
+    3300034: plantenbakken 1
+    3300036: plantenbakken 2
+    3300038: plantenbakken 3
+    3300040: plantenbakken 4
+    3300042: plantenbakken 5
+    3300044: Plein
+    3300046: stadhuis
+    3300048: stambeeld
+    3300050: stambeeld 1
+    3300052: verhoging004
+    3300054: verhoging005
+    3300056: verhoging006
+    3300058: verhoging01
+    3300060: verhoging02
+    3300062: verhoging03
+    4300000: Plein
+    4300002: verhoging005
+    4300004: verhoging004
+    4300006: verhoging03
+    4300008: verhoging01
+    4300010: verhoging02
+    4300012: stambeeld
+    4300014: verhoging006
+    4300016: stambeeld
+    4300018: omheining
+    4300020: Bankjes01
+    4300022: Bankjes05
+    4300024: Bankjes04
+    4300026: Bankjes02
+    4300028: Bankjes03
+    4300030: gebouw
+    4300032: gebouwen006
+    4300034: gebouwen005
+    4300036: gebouwen004
+    4300038: gebouwen03
+    4300040: gebouwen02
+    4300042: gebouwen01
+    4300044: stadhuis
+    4300046: gebouw6
+    4300048: plantenbakken
+    4300050: plantenbakken
+    4300052: plantenbakken
+    4300054: plantenbakken
+    4300056: plantenbakken
+    4300058: plantenbakken
+    4300060: grasgrond
+    4300062: mens
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
