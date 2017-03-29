@@ -8,7 +8,7 @@ public class FriendlyNPC : NPC {
 
     //[SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
-    GameObject target;
+    Landmark target;
 
     Animator animator {
         get {
@@ -40,10 +40,12 @@ public class FriendlyNPC : NPC {
         if (agent.enabled) {
             if (agent.remainingDistance < 2 && !isInPanic) {
                 // When he's close enough, find and set a new destination for the poor bugger
-                target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+                target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
                 agent.SetDestination(target.transform.position);
             }
-        }
+        target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
+        agent.SetDestination(target.transform.position);
+    }
 
         //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace"));
         //if (agent.speed < 5 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
@@ -57,7 +59,7 @@ public class FriendlyNPC : NPC {
             friendlies.Remove(this);
             all.Remove(this);
         }
-        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count);
+        print("Deleted from list! " + this + "  friendlies is: " + friendlies.Count + "   all is: " + all.Count + "   enemies is: " + NPC.hostiles.Count);
     }
 
     public void Panic() { // at the Disco
