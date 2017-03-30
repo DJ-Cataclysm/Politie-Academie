@@ -40,19 +40,23 @@ public class TriggerAction : MonoBehaviour {
 
     private void Start() {
         player = GameObject.Find("Player").transform;
-        animator.SetBool("BNeutral2Walking", true);
+        animator.SetBool("Walking", true);
         //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).ToString());
     }
 
     private void Update() {
-        if (agent.speed > 4 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
-            animator.SetBool("BWalking2Running", true);
-            animator.SetBool("BRunning2Walking", false);
+        //if (agent.speed > 4 && (animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking_inPlace 0"))) {
+        if (agent.speed > 4) {
+            animator.SetBool("Running", true);
+            animator.SetBool("Walking", false);
+            animator.SetBool("Idle", false);
         }
 
-        if (agent.speed < 6 && (animator.GetCurrentAnimatorStateInfo(0).IsName("running_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("running_inPlace 0"))) {
-            animator.SetBool("BRunning2Walking", true);
-            animator.SetBool("BWalking2Running", false);
+        //if (agent.speed < 6 && (animator.GetCurrentAnimatorStateInfo(0).IsName("running_inPlace") || animator.GetCurrentAnimatorStateInfo(0).IsName("running_inPlace 0"))) {
+        if (agent.speed < 6) {
+            animator.SetBool("Walking", true);
+            animator.SetBool("Running", false);
+            animator.SetBool("Idle", false);
         }
 
         if (isRunning) {
