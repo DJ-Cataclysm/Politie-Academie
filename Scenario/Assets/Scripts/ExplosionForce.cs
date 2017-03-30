@@ -21,6 +21,7 @@ public class ExplosionForce : MonoBehaviour {
         {
             //this.gameObject.GetComponent<AudioSource>().PlayOneShot();
             Debug.Log("EXPLOOOOOOOOOOOOOOOOSION");
+            this.gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);
             Vector3 explosionPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
             foreach (Collider hit in colliders)
