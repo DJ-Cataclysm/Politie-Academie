@@ -29,7 +29,7 @@ public class FriendlyNPC : NPC {
 
         agent.SetDestination(target.transform.position);
 
-        animator.SetBool("Neutral2Walking", true);
+        animator.SetBool("Walking", true);
     }
 
     // Agent will move towards his destination, until he's close

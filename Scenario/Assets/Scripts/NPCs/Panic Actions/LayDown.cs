@@ -27,7 +27,7 @@ public class LayDown : MonoBehaviour, IPanic {
 
     private void OnEnable() {
 
-        animator.SetBool("Walking2Jump", true);
+        animator.SetBool("Jump Away", true);
         //animator.applyRootM-otion = false;
         //turn = true;
         _target = gameObject;
