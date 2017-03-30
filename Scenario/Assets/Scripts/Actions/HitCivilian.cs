@@ -11,7 +11,10 @@ public class HitCivilian : MonoBehaviour {
 
         int loops = 0;
         while (target == null) {
-            if (loops > 10) return;
+            if (loops > 10) {
+                GetComponent<TriggerAction>().stopShooting();
+                return;
+            }
             loops++;
             Transform temp = NPC.friendlies[Random.Range(0, NPC.friendlies.Count)].transform;
             if (temp == null) break;
@@ -19,17 +22,17 @@ public class HitCivilian : MonoBehaviour {
 
             RaycastHit info;
             if (Physics.Linecast(transform.position, temp.position, out info, LayerMask.GetMask("Neutral"))) {
-                if(!info.transform.tag.Equals("Civilian")) continue;
+                if (!info.transform.tag.Equals("Civilian")) continue;
             }
 
             if (!temp.gameObject.tag.Equals("Civilian")) continue;
-            
+
             target = temp;
         }
-        if (target == null) return;
-
-        Destroy(target.GetComponent<NavMeshAgent>());
-        Destroy(target.GetComponent<FriendlyNPC>());
+        if (target == null) {
+            GetComponent<TriggerAction>().stopShooting();
+            return;
+        }
 
         // Turn to target (in Update)
         isTurning = true;
@@ -49,19 +52,9 @@ public class HitCivilian : MonoBehaviour {
 
     private void ShootGun() {
         GetComponent<AudioSource>().Play();
-        Transform gunhole = this.transform.GetChild(1);
-        Vector3 forward = gunhole.transform.TransformDirection(Vector3.forward);
-        RaycastHit targetHit;
-
-        Debug.DrawRay(gunhole.transform.position, forward, Color.red, 50);
-        // Shoot the bullet, and if it hits, check if it is a civilian or a target
-        if (Physics.Raycast(gunhole.transform.position, forward, out targetHit)) {
-            if (targetHit.transform.gameObject.tag.Equals("Civilian")) {
-                //Spawn.getFriendlyNpcList().Remove(targetHit.transform);
-                //print(targetHit.transform.name);
-                Destroy(targetHit.transform.gameObject);
-            }
-        }
+        GetComponent<TriggerAction>().stopShooting();
+        Debug.Log("SHOOT!");
+        Destroy(target.gameObject);
         isTurning = false;
     }
 }

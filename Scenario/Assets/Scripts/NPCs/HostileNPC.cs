@@ -5,25 +5,38 @@ using UnityEngine.AI;
 
 public class HostileNPC : NPC {
 
-    [SerializeField] private int landmarkAmount;
     NavMeshAgent agent;
-    GameObject target;
+    Landmark target;
 
-    // Use this for initialization
-    void Start () {
-        agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Landmark" + Random.Range(1, landmarkAmount + 1));
+    public bool targetPlayer = false;
+
+    private void Awake() {
+        NPC.hostiles.Add(this);
+        //NPC.all.Add(this);
     }
 
-    // Update is called once per frame
-    void Update () {
+    void Start() {
+        agent = GetComponent<NavMeshAgent>();
+        target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
         agent.SetDestination(target.transform.position);
-        if (agent.remainingDistance < 2) {
+    }
+
+    void Update() {
+        if (agent.remainingDistance < 2 && !targetPlayer) {
             // When he's close enough, find and set a new destination for the poor bugger
-            target = GameObject.Find("Landmark" + Random.Range(1, (landmarkAmount + 1)));
+            target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
             agent.SetDestination(target.transform.position); ;
         }
     }
+
+    private void OnEnable() {
+        if (agent != null) {
+            targetPlayer = false;
+            target = Mark.landmarks[Random.Range(0, Mark.landmarks.Count)];
+            agent.SetDestination(target.transform.position);
+        }
+    }
+
     protected override void OnDestroy() {
         if (hostiles != null) {
             hostiles.Remove(this);

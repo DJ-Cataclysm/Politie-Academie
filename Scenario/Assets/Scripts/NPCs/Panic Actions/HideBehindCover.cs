@@ -31,7 +31,6 @@ public class HideBehindCover : MonoBehaviour, IPanic {
         _target = GameObject.Find("Covermark" + UnityEngine.Random.Range(1, (covermarkAmount + 1)));
     }
 
-    // Update is called once per frame
     void Update() {
         if (agent.speed < 10) {
             agent.speed *= 1.01f;
