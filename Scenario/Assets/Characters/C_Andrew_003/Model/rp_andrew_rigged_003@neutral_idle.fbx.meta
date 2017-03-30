@@ -222,7 +222,7 @@ ModelImporter:
     4300020: mixamo:andrew_rg_003_jeans
     4300022: mixamo:andrew_rg_003_shirt
     4300024: mixamo:andrew_rg_003_jacket
-    7400000: mixamo.com
+    7400000: neutral_idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -244,7 +244,213 @@ ModelImporter:
     animationScaleError: 0
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: neutral_idle
+      takeName: mixamo.com
+      firstFrame: 0
+      lastFrame: 263
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: andrew_rg_003_geometry_grp
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_body
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_eye_l
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_eye_r
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_eyelashes
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_eyeShadow_l
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_eyeShadow_r
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_teeth_bottom
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_body_grp/mixamo:andrew_rg_003_teeth_top
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp/mixamo:andrew_rg_003_jacket
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp/mixamo:andrew_rg_003_jeans
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp/mixamo:andrew_rg_003_shirt
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp/mixamo:andrew_rg_003_shoe_l
+        weight: 1
+      - path: andrew_rg_003_geometry_grp/andrew_rg_003_cloth_grp/mixamo:andrew_rg_003_shoe_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_l/andrew_rg_003_kneeJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_l/andrew_rg_003_kneeJnt_l/andrew_rg_003_ankleJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_l/andrew_rg_003_kneeJnt_l/andrew_rg_003_ankleJnt_l/andrew_rg_003_ballJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_l/andrew_rg_003_kneeJnt_l/andrew_rg_003_ankleJnt_l/andrew_rg_003_ballJnt_l/andrew_rg_003_tipJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_r/andrew_rg_003_kneeJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_r/andrew_rg_003_kneeJnt_r/andrew_rg_003_ankleJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_r/andrew_rg_003_kneeJnt_r/andrew_rg_003_ankleJnt_r/andrew_rg_003_ballJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_legJnt_r/andrew_rg_003_kneeJnt_r/andrew_rg_003_ankleJnt_r/andrew_rg_003_ballJnt_r/andrew_rg_003_tipJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_eyeJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_eyeJnt_l/andrew_rg_003_eyeEndJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_eyeJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_eyeJnt_r/andrew_rg_003_eyeEndJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_headEndJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_lowerJawJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_neckJnt/andrew_rg_003_headJnt/andrew_rg_003_lowerJawJnt/andrew_rg_003_lowerJawEndJnt
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_indexJnt1_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_indexJnt1_l/andrew_rg_003_hand_indexJnt2_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_indexJnt1_l/andrew_rg_003_hand_indexJnt2_l/andrew_rg_003_hand_indexJnt3_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_indexJnt1_l/andrew_rg_003_hand_indexJnt2_l/andrew_rg_003_hand_indexJnt3_l/andrew_rg_003_hand_indexJnt4_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_middleJnt1_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_middleJnt1_l/andrew_rg_003_hand_middleJnt2_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_middleJnt1_l/andrew_rg_003_hand_middleJnt2_l/andrew_rg_003_hand_middleJnt3_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_middleJnt1_l/andrew_rg_003_hand_middleJnt2_l/andrew_rg_003_hand_middleJnt3_l/andrew_rg_003_hand_middleJnt4_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_pinkyJnt1_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_pinkyJnt1_l/andrew_rg_003_hand_pinkyJnt2_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_pinkyJnt1_l/andrew_rg_003_hand_pinkyJnt2_l/andrew_rg_003_hand_pinkyJnt3_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_pinkyJnt1_l/andrew_rg_003_hand_pinkyJnt2_l/andrew_rg_003_hand_pinkyJnt3_l/andrew_rg_003_hand_pinkyJnt4_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_ringJnt1_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_ringJnt1_l/andrew_rg_003_hand_ringJnt2_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_ringJnt1_l/andrew_rg_003_hand_ringJnt2_l/andrew_rg_003_hand_ringJnt3_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_ringJnt1_l/andrew_rg_003_hand_ringJnt2_l/andrew_rg_003_hand_ringJnt3_l/andrew_rg_003_hand_ringJnt4_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_thumbJnt1_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_thumbJnt1_l/andrew_rg_003_hand_thumbJnt2_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_thumbJnt1_l/andrew_rg_003_hand_thumbJnt2_l/andrew_rg_003_hand_thumbJnt3_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_l/andrew_rg_003_armJnt_l/andrew_rg_003_elbowJnt_l/andrew_rg_003_wristJnt_l/andrew_rg_003_hand_thumbJnt1_l/andrew_rg_003_hand_thumbJnt2_l/andrew_rg_003_hand_thumbJnt3_l/andrew_rg_003_hand_thumbJnt4_l
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_indexJnt1_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_indexJnt1_r/andrew_rg_003_hand_indexJnt2_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_indexJnt1_r/andrew_rg_003_hand_indexJnt2_r/andrew_rg_003_hand_indexJnt3_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_indexJnt1_r/andrew_rg_003_hand_indexJnt2_r/andrew_rg_003_hand_indexJnt3_r/andrew_rg_003_hand_indexJnt4_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_middleJnt1_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_middleJnt1_r/andrew_rg_003_hand_middleJnt2_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_middleJnt1_r/andrew_rg_003_hand_middleJnt2_r/andrew_rg_003_hand_middleJnt3_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_middleJnt1_r/andrew_rg_003_hand_middleJnt2_r/andrew_rg_003_hand_middleJnt3_r/andrew_rg_003_hand_middleJnt4_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_pinkyJnt1_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_pinkyJnt1_r/andrew_rg_003_hand_pinkyJnt2_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_pinkyJnt1_r/andrew_rg_003_hand_pinkyJnt2_r/andrew_rg_003_hand_pinkyJnt3_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_pinkyJnt1_r/andrew_rg_003_hand_pinkyJnt2_r/andrew_rg_003_hand_pinkyJnt3_r/andrew_rg_003_hand_pinkyJnt4_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_ringJnt1_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_ringJnt1_r/andrew_rg_003_hand_ringJnt2_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_ringJnt1_r/andrew_rg_003_hand_ringJnt2_r/andrew_rg_003_hand_ringJnt3_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_ringJnt1_r/andrew_rg_003_hand_ringJnt2_r/andrew_rg_003_hand_ringJnt3_r/andrew_rg_003_hand_ringJnt4_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_thumbJnt1_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_thumbJnt1_r/andrew_rg_003_hand_thumbJnt2_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_thumbJnt1_r/andrew_rg_003_hand_thumbJnt2_r/andrew_rg_003_hand_thumbJnt3_r
+        weight: 1
+      - path: andrew_rg_003_rig_grp/andrew_rg_003_hipJnt/andrew_rg_003_spine1Jnt/andrew_rg_003_spine2Jnt/andrew_rg_003_spine3Jnt/andrew_rg_003_shoulderJnt_r/andrew_rg_003_armJnt_r/andrew_rg_003_elbowJnt_r/andrew_rg_003_wristJnt_r/andrew_rg_003_hand_thumbJnt1_r/andrew_rg_003_hand_thumbJnt2_r/andrew_rg_003_hand_thumbJnt3_r/andrew_rg_003_hand_thumbJnt4_r
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -270,6 +476,7 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -280,7 +487,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
